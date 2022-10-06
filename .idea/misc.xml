@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/3etimds/Documents/GitHub/TccAppGamesWave/app/src/main/res/drawable/bg_gradiente.xml" value="0.2985" />
         <entry key="..\:/Users/3etimds/Documents/GitHub/TccAppGamesWave/app/src/main/res/drawable/borda_arredondada.xml" value="0.2985" />
+        <entry key="..\:/Users/3etimds/Documents/GitHub/TccAppGamesWave/app/src/main/res/drawable/linha_input.xml" value="0.2985" />
+        <entry key="..\:/Users/3etimds/Documents/GitHub/TccAppGamesWave/app/src/main/res/drawable/seta_volta.xml" value="0.2985" />
+        <entry key="..\:/Users/3etimds/Documents/GitHub/TccAppGamesWave/app/src/main/res/layout/activity_esqueceu_asenha.xml" value="0.358695652173913" />
         <entry key="..\:/Users/3etimds/Documents/GitHub/TccAppGamesWave/app/src/main/res/layout/activity_login.xml" value="0.358695652173913" />
         <entry key="..\:/Users/3etimds/Documents/GitHub/TccAppGamesWave/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
       </map>

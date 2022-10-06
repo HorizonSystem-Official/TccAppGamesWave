@@ -4,42 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
     tools:context=".login">
 
-    <TextView
+    <ImageView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="8dp"
-        android:text="Bem Vindo"
+        android:src="@drawable/logogameswave"
         android:textSize="42sp"
         android:textColor="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Faça login para entrar"
-        android:textSize="16sp"
-        android:textColor="@color/colorText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
     <EditText
         android:id="@+id/editUserLogin"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_margin="40dp"
         android:background="@drawable/bg_txt_username"
         android:hint="@string/TxtEmailFunc"
         android:inputType="textEmailAddress"
@@ -48,13 +34,13 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/EditSenhaLogin"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:layout_margin="20dp"
+        android:layout_margin="40dp"
         android:textSize="16sp"
         android:paddingStart="60dp"
         android:hint="@string/TxtSenha"
@@ -74,7 +60,7 @@
         android:background="@drawable/borda_aredondada"
         android:text="Sign in"
         android:textColor="@color/white"
-        app:backgroundTint="@color/CorBase"
+        app:backgroundTint="@color/BaseRoxo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EditSenhaLogin" />
@@ -84,6 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:textSize="16sp"
         android:text="@string/TxtEsquesioASenha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +80,8 @@
         android:id="@+id/TxtCriarConta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="26dp"
+        android:textSize="16sp"
         android:text="@string/TxtCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

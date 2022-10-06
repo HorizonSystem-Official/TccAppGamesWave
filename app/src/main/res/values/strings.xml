@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">TccAppGamesWave</string>
-<!--    Login-->
+    <!--    Login-->
     <string name="TxtEmailFunc">Email</string>
     <string name="TxtSenha">Senha</string>
+    <string name="TxtCPF">CPF</string>
     <string name="TxtCadastro">Criar uma conta</string>
     <string name="TxtEsquesioASenha">Esqueceu a Senha?</string>
+    <string name="insira_seus">Insira seus dados para recuperar sua senha.</string>
 </resources>
