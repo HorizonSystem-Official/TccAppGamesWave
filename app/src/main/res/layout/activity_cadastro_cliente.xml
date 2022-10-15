@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bglogin_roxo"
+    tools:context=".cadastroCliente">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="32dp"
+            android:paddingBottom="50dp">
+
+
+        <ImageView
+            android:id="@+id/imageViewVoltar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/seta_voltar" />
+
+        <TextView
+            android:id="@+id/textViewCadastre"
+            style="@style/TxtPadraoTxt"
+            android:layout_marginTop="37dp"
+            android:text="@string/TxtCadastro"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewVoltar" />
+
+        <TextView
+            android:id="@+id/textViewAux"
+            style="@style/TxtPadraoTxt"
+            android:layout_marginTop="24dp"
+            android:text="@string/TxtcadastroAux"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCadastre" />
+
+
+        <TextView
+            android:id="@+id/textViewNome"
+            style="@style/TxtPadraoTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/txtNomeUser"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAux" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_textNome"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:inputType="text"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
+
+        <TextView
+            android:id="@+id/textViewEmail"
+            style="@style/TxtPadraoTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/TxtEmailFunc"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_textNome" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_textEmail"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:inputType="text"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
+
+        <TextView
+            android:id="@+id/textViewCPF"
+            style="@style/TxtPadraoTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/TxtCPF"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_textEmail" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_textCPF"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:inputType="text"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCPF" />
+
+        <TextView
+            android:id="@+id/textViewTel"
+            style="@style/TxtPadraoTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/TxtTel"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_textCPF" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_textTel"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:inputType="text"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTel" />
+
+        <TextView
+            android:id="@+id/textViewSenha"
+            style="@style/TxtPadraoTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/TxtSenha"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_textTel" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_textSenha"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:inputType="text"
+            android:textColor="@color/CinzaClaro"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSenha" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="206dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/borda_aredondada"
+                android:text="@string/TxtCriarconta"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/BaseRoxo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_textSenha" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

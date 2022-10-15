@@ -1,10 +1,19 @@
 <resources>
-    <string name="app_name">TccAppGamesWave</string>
+    <string name="app_name">Games Wave</string>
     <!--    Login-->
     <string name="TxtEmailFunc">Email</string>
     <string name="TxtSenha">Senha</string>
     <string name="TxtCPF">CPF</string>
-    <string name="TxtCadastro">Criar uma conta</string>
+    <string name="TxtEntrar">Entrar</string>
+    <string name="TxtCriarconta">Criar uma conta</string>
+
     <string name="TxtEsquesioASenha">Esqueceu a Senha?</string>
     <string name="insira_seus">Insira seus dados para recuperar sua senha.</string>
+    <string name="txtAutenticar">AUTENTICAR</string>
+
+    <string name="TxtCadastro">Cadastre-se</string>
+    <string name="TxtcadastroAux">Crie seu perfil para poder efetuar compar na loja.</string>
+    <string name="txtNomeUser">Seu Nome</string>
+    <string name="TxtTel">Telefone</string>
+    <string name="txtDataNasc">Data de Nascimento </string>
 </resources>

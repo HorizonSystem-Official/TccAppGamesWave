@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradiente"
+    android:padding="32dp"
     tools:context=".esqueceuAsenha">
 
 
@@ -12,7 +13,6 @@
         android:id="@+id/imageView"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_margin="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/seta_voltar" />
@@ -20,7 +20,6 @@
     <TextView
         android:id="@+id/textViewEsqueceu"
         style="@style/TxtPadraoTxt"
-        android:layout_marginStart="36dp"
         android:layout_marginTop="37dp"
         android:textSize="32sp"
         android:text="@string/TxtEsquesioASenha"
@@ -30,7 +29,6 @@
     <TextView
         android:id="@+id/textViewEsqueceuAux"
         style="@style/TxtPadraoTxt"
-        android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
         android:textColor="@color/CinzaEscuro"
         android:text="@string/insira_seus"
@@ -39,17 +37,62 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewEsqueceu" />
 
 
+    <TextView
+        android:id="@+id/textViewCpf"
+        style="@style/TxtPadraoTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TxtCPF"
+        android:layout_marginTop="48dp"
+        android:textColor="@color/BaseRoxoescuro"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEsqueceuAux" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edit_text"
+        android:id="@+id/edit_textCpf"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_margin="40dp"
-        android:hint="@string/TxtCPF"
+        android:layout_height="42dp"
         android:inputType="text"
         android:textColor="@color/colorText"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEsqueceuAux" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCpf" />
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        style="@style/TxtPadraoTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TxtEmailFunc"
+        android:textColor="@color/BaseRoxoescuro"
+        android:layout_marginTop="48dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_textCpf" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_textEmail"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:inputType="text"
+        android:textColor="@color/colorText"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtAutenticar"
+        android:layout_marginTop="64dp"
+        android:paddingStart="52dp"
+        android:paddingEnd="52dp"
+        android:background="@drawable/borda_aredondada"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_textEmail" />
 </androidx.constraintlayout.widget.ConstraintLayout>
