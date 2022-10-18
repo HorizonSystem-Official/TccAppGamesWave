@@ -16,4 +16,14 @@
     <string name="txtNomeUser">Seu Nome</string>
     <string name="TxtTel">Telefone</string>
     <string name="txtDataNasc">Data de Nascimento </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--texto menu -->
+    <string name="TxtPedidos">Meus pedidos</string>
+    <string name="TxtFav">Favoritos</string>
+    <string name="TxtSair">Sair</string>
+    <string name="TxtHome">Home</string>
+    <string name="TxtConta">Conta</string>
+    <string name="TxtConfig">Configurações</string>
 </resources>

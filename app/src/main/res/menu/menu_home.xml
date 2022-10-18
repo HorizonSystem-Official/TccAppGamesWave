@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/navHome"
-        android:title="Home"
-        android:icon="@drawable/seta_voltar"></item>
+        android:title="@string/TxtHome"
+        android:icon="@drawable/home"/>
 
-    <item android:id="@+id/navProfile"
-        android:title="Profile"
-        android:icon="@drawable/seta_voltar"  ></item>
+    <item android:id="@+id/navPedidos"
+        android:title="@string/TxtPedidos"
+        android:icon="@drawable/pedido"/>
 
-    <item android:id="@+id/navSettings"
-        android:title="Settings"
-        android:icon="@drawable/seta_voltar"></item>
+    <item android:id="@+id/navConta"
+        android:title="@string/TxtConta"
+        android:icon="@drawable/user"/>
 
-    <item android:id="@+id/navFeedback"
-        android:title="Feedback"
-        android:icon="@drawable/seta_voltar"></item>
+    <item android:id="@+id/navFav"
+        android:title="@string/TxtFav"
+        android:icon="@drawable/favorito_vazio"/>
 
-    <item android:id="@+id/navHelp"
-        android:title="Help"
-        android:icon="@drawable/seta_voltar"></item>
+    <item android:id="@+id/navConfig"
+        android:title="@string/TxtConfig"
+        android:icon="@drawable/configuracao"/>
+
+    <item android:id="@+id/navsair"
+        android:title="@string/TxtSair"
+        android:icon="@drawable/log_out"/>
 </menu>

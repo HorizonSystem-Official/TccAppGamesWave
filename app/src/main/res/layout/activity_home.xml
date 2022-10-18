@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
     android:background="@color/white"
     tools:context=".Home">
 
-
+    <!--top Bar-->
     <LinearLayout
         android:id="@+id/mainContent"
         android:orientation="vertical"
@@ -19,15 +20,11 @@
             android:layout_width="match_parent">
      </include>
 
-        <TextView
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Main Content"
-            android:textSize="40sp"
-            android:layout_gravity="center"
-            android:gravity="center"
+            android:layout_height="match_parent" />
 
-            />
     </LinearLayout>
 
 <!--    Side Bar-->
@@ -36,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:menu="@menu/menu_home"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         app:headerLayout="@layout/header_layout"
         android:background="@color/BaseRoxo"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
