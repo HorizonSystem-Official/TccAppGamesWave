@@ -3,6 +3,9 @@ package com.example.tccappgameswave;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Produto {
 
     @SerializedName("CodProd")
@@ -44,6 +47,12 @@ public class Produto {
     @SerializedName("FkFunc")
     @Expose
     public Integer FkFunc;
+
+    public Produto(String prodNome, Double prodValor, String imgCapa) {
+        this.ProdNome=prodNome;
+        this.ProdValor=prodValor;
+        this.ImgCapa=imgCapa;
+    }
 
     public Integer getCodProd() {
         return CodProd;
@@ -127,10 +136,10 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "CodProd:" + getCodProd() +
-                "\n ProdNome" + getProdNome()+
-                "\n ProdTipo:" + getProdTipo()+
-                "\n ProdValor:" + getProdValor()+
-                "\n ImgCapa:" + getImgCapa()+"\n";
+        return "CodProd: " + getCodProd() +
+                "\n ProdNome: " + getProdNome()+
+                "\n ProdTipo: " + getProdTipo()+
+                "\n ProdValor: " + getProdValor()+
+                "\n ImgCapa: " + getImgCapa()+"\n";
     }
 }

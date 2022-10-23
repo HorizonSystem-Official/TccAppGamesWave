@@ -16,6 +16,10 @@
     <string name="txtNomeUser">Seu Nome</string>
     <string name="TxtTel">Telefone</string>
     <string name="txtDataNasc">Data de Nascimento </string>
+
+    <!--Home -->
+    <string name="TxtLanc">Lançamentos</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
