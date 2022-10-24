@@ -1,5 +1,6 @@
 package com.example.tccappgameswave;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
-    private final String URL = "https://differenttealtower54.conveyor.cloud/api/Produto/";
+    private final String URL = "https://oldbluephone64.conveyor.cloud/api/Produto/";
 
     private Retrofit retrofitHomeProd;
 
@@ -58,6 +58,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setFocusable(false);
         recyclerView.setVisibility(View.VISIBLE);
+
         return view;
     }
 
@@ -76,6 +77,8 @@ public class HomeFragment extends Fragment {
                     produtoList = response.body();
                     adapter.setMovieList(produtoList);
                     Log.i("Lista de Jogos", String.valueOf(produtoList));
+
+
                 }
             }
 
@@ -85,5 +88,4 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
 }

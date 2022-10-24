@@ -17,11 +17,10 @@
     <string name="TxtTel">Telefone</string>
     <string name="txtDataNasc">Data de Nascimento </string>
 
-    <!--Home -->
+    <!--Categoria -->
+    <string name="TxtCat">categoria</string>
     <string name="TxtLanc">Lançamentos</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--texto menu -->
     <string name="TxtPedidos">Meus pedidos</string>

@@ -1,6 +1,7 @@
 package com.example.tccappgameswave;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,15 +23,15 @@ import java.util.List;
 public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycler.ProdutoViewHolder> {
 
     Context context;
-    List<Produto> listProd;
+    List<Produto> produtoList;
 
     public AdapterHomeRecycler(Context context, List<Produto> listProd){
         this.context=context;
-        this.listProd=listProd;
+        this.produtoList=listProd;
     }
 
     public void setMovieList(List<Produto> listProd) {
-        this.listProd = listProd;
+        this.produtoList = listProd;
         notifyDataSetChanged();
     }
 
@@ -45,22 +47,29 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
     public void onBindViewHolder(@NonNull AdapterHomeRecycler.ProdutoViewHolder holder, int position) {
         //define da onde vem os valores
         Picasso.get()
-                .load(listProd.get(position).getImgCapa())
+                .load(produtoList.get(position).getImgCapa())
                 .placeholder(R.mipmap.ic_launcher_round)
                 .error(R.mipmap.ic_launcher_round)
                 .into(holder.imgviewProd);
 
-        holder.txtViewProdNome.setText(listProd.get(position).getProdNome());
-        holder.TxtViewProdPreco.setText(listProd.get(position).getProdValor().toString());
+        String prodNome =produtoList.get(position).getProdNome();
+
+        if(prodNome.length()>10){
+            holder.txtViewProdNome.setText(prodNome.substring(1, 8)+"...");
+        }else {
+            holder.txtViewProdNome.setText(prodNome);
+        }
+
+        holder.TxtViewProdPreco.setText(produtoList.get(position).getProdValor().toString());
     }
 
     @Override
     public int getItemCount() {
-        return listProd == null ? 0 : listProd.size();
+        return produtoList == null ? 0 : produtoList.size();
     }
 
     //define os campo com o layout
-    public static class ProdutoViewHolder extends RecyclerView.ViewHolder {
+    public class ProdutoViewHolder extends RecyclerView.ViewHolder {
          ImageView imgviewProd;
          TextView txtViewProdNome;
          TextView TxtViewProdPreco;
@@ -71,7 +80,15 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
             imgviewProd = itemView.findViewById(R.id.imgviewProd);
             txtViewProdNome = itemView.findViewById(R.id.txtViewProdNome);
             TxtViewProdPreco = itemView.findViewById(R.id.TxtViewProdPreco);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   Log.d("Click list","teste");
+                }
+            });
         }
     }
+
 
 }

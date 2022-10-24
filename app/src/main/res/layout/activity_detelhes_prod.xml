@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/BaseRoxo"
+    android:layout_height="match_parent"
+    tools:context=".DetelhesProd">
+
+    <ImageView
+        android:id="@+id/imageViewVoltarHome"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="15dp"
+        app:srcCompat="@drawable/seta_voltar" />
+
+    <ImageView
+        android:id="@+id/imgviewProd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewVoltarHome"
+        app:srcCompat="@drawable/logogameswave" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/TxtPadraoTxtClaro"
+        android:layout_marginStart="15dp"
+        android:text="jogo do elmo"
+        android:layout_marginTop="9dp"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgviewProd" />
+
+    <TextView
+        android:id="@+id/textViewCatAux"
+        style="@style/TxtPadraoTxtClaro"
+        android:text="@string/TxtCat"
+        android:textColor="@color/Cinza"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textViewCat"
+        style="@style/TxtPadraoTxtClaro"
+        android:text="Livre"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@+id/textViewCatAux"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textViewLanAux"
+        style="@style/TxtPadraoTxtClaro"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:text="@string/TxtLanc"
+        android:textColor="@color/Cinza"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCatAux" />
+
+    <TextView
+        android:id="@+id/textViewDateLanc"
+        style="@style/TxtPadraoTxtClaro"
+        android:text="2014"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@+id/textViewLanAux"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCat" />
+
+    <TextView
+        android:id="@+id/textViewDesc"
+        style="@style/TxtPadraoTxtClaro"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="15dp"
+        android:text="Desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLanAux" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
