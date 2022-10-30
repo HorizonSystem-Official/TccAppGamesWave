@@ -26,7 +26,7 @@
         app:srcCompat="@drawable/logogameswave" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewNomeProduto"
         style="@style/TxtPadraoTxtClaro"
         android:layout_marginStart="15dp"
         android:text="jogo do elmo"
@@ -43,7 +43,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomeProduto" />
 
     <TextView
         android:id="@+id/textViewCat"
@@ -52,7 +52,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@+id/textViewCatAux"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomeProduto" />
 
     <TextView
         android:id="@+id/textViewLanAux"

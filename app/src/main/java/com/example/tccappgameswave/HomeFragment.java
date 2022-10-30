@@ -22,7 +22,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
-    private final String URL = "https://oldbluephone64.conveyor.cloud/api/Produto/";
+    private final String URL = "https://oldsparklyboat45.conveyor.cloud/api/Produto/";
 
     private Retrofit retrofitHomeProd;
 
@@ -36,9 +36,8 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         produtoList = new ArrayList<>();
 
-
         retrofitHomeProd = new Retrofit.Builder()
-                .baseUrl(URL)                                       //endereço do webservice
+                .baseUrl(URL)                                       //endere-ço do webservice
                 .addConverterFactory(GsonConverterFactory.create()) //conversor
                 .build();
         //lista os jogos
@@ -50,6 +49,14 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
+
+        View banner=(View) view.findViewById(R.id.banner);
+        banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DetelhesProd();
+            }
+        });
 
         //inicia o recyclerView
         recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCat);
@@ -87,5 +94,10 @@ public class HomeFragment extends Fragment {
                 Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
             }
         });
+    }
+
+    public  void DetelhesProd(){
+        Intent DetelhesProd = new Intent(getActivity(), DetelhesProd.class);
+        startActivity(DetelhesProd);
     }
 }

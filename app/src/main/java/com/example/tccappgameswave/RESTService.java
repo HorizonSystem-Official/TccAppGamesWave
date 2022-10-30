@@ -10,6 +10,6 @@ public interface RESTService {
     @GET("prodCategoria?")
     Call<List<Produto>> MostraProdPorCat(@Query("cat") String cat);
 
-    @GET("prodDetalhes?")
-    retrofit2.Call<Produto> MostraProdDetalhes(@Query("codProd") int codProd);
+    @GET("umProdSimples?")
+    Call<List<Produto>> MostraProdDetalhes(@Query("idProd") int codProd);
 }
