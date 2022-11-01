@@ -74,13 +74,46 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewCat" />
 
     <TextView
-        android:id="@+id/textViewDesc"
+        android:id="@+id/textViewFaixa"
         style="@style/TxtPadraoTxtClaro"
-        android:layout_marginTop="22dp"
-        android:layout_marginStart="15dp"
-        android:text="Desc"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:text="14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLanAux" />
+
+    <TextView
+        android:id="@+id/textViewDesc"
+        style="@style/TxtPadraoTxtClaro"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:text="Desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFaixa" />
+
+    <TextView
+        android:id="@+id/textViewPreco"
+        style="@style/TxtPadraoTxtClaro"
+        android:layout_marginTop="32dp"
+        android:text="R$: 26.99"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDesc" />
+
+    <Button
+        android:id="@+id/btnAddCarrinho"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="38dp"
+        android:background="@drawable/borda_aredondada"
+        android:backgroundTint="@color/BaseRosa"
+        android:text="@string/TxtAddCarrinho"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPreco" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

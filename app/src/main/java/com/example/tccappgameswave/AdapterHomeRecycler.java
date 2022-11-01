@@ -22,12 +22,15 @@ import java.util.List;
 
 public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycler.ProdutoViewHolder> {
 
+    private final RecyclerViewInterface recyclerViewInterface;
+
     Context context;
     List<Produto> produtoList;
 
-    public AdapterHomeRecycler(Context context, List<Produto> listProd){
+    public AdapterHomeRecycler(Context context, List<Produto> listProd, RecyclerViewInterface recyclerViewInterface){
         this.context=context;
         this.produtoList=listProd;
+        this.recyclerViewInterface=recyclerViewInterface;
     }
 
     public void setMovieList(List<Produto> listProd) {
@@ -40,7 +43,7 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
     //define o layout usadado
     public AdapterHomeRecycler.ProdutoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.produto_item,parent,false);
-        return new ProdutoViewHolder(view);
+        return new ProdutoViewHolder(view,recyclerViewInterface);
     }
 
     @Override
@@ -74,7 +77,7 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
          TextView txtViewProdNome;
          TextView TxtViewProdPreco;
 
-        public ProdutoViewHolder(@NonNull View itemView) {
+        public ProdutoViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             imgviewProd = itemView.findViewById(R.id.imgviewProd);
@@ -84,11 +87,17 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   Log.d("Click list","teste");
+                   if(recyclerViewInterface!=null){
+                       Log.d("Click list","teste");
+                       int pos=getAdapterPosition();
+
+                       if(pos!=RecyclerView.NO_POSITION){
+                           recyclerViewInterface.onItemClick(pos);
+                       }
+                   }
+
                 }
             });
         }
     }
-
-
 }

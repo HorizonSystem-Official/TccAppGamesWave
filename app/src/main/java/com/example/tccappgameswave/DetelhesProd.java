@@ -2,11 +2,15 @@ package com.example.tccappgameswave;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -17,7 +21,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DetelhesProd extends AppCompatActivity {
-    private final String URL = "https://oldsparklyboat45.conveyor.cloud/api/Produto/";
+    private final String URL = "https://funshinybook65.conveyor.cloud/api/Produto/";
 
     private Retrofit retrofitProd;
     List<Produto> prod;
@@ -33,11 +37,11 @@ public class DetelhesProd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detelhes_prod);
 
-        ImageView imgProd = (ImageView) findViewById(R.id.imgviewProd);
-        TextView textNomeProd =(TextView) findViewById(R.id.textViewNomeProduto);
-        TextView textCat =(TextView) findViewById(R.id.textViewCat);
-        TextView textDateLanc =(TextView) findViewById(R.id.textViewDateLanc);
-        TextView textDesc =(TextView) findViewById(R.id.textViewDesc);
+         imgProd = (ImageView) findViewById(R.id.imgviewProd);
+         textNomeProd =(TextView) findViewById(R.id.textViewNomeProduto);
+         textCat =(TextView) findViewById(R.id.textViewCat);
+         textDateLanc =(TextView) findViewById(R.id.textViewDateLanc);
+         textDesc =(TextView) findViewById(R.id.textViewDesc);
 
         retrofitProd = new Retrofit.Builder()
                 .baseUrl(URL)                                       //endereço do webservice
@@ -45,23 +49,39 @@ public class DetelhesProd extends AppCompatActivity {
                 .build();
         //lista os jogos
         MostraUmProd();
+
+        ImageView btnVoltarHome = (ImageView) findViewById(R.id.imageViewVoltarHome);
+        btnVoltarHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TelaHome();
+            }
+        });
     }
 
     private void MostraUmProd() {
-        //pega categoria
-        int codProd=3;
+        Intent intent = getIntent();
+        int codProd = intent.getIntExtra("codProduto",2);
 
         //pesquisa
         RESTService restService = retrofitProd.create(RESTService.class);
         Call<List<Produto>> call= restService.MostraProdDetalhes(codProd);
+
+
         //executa e mostra a requisisao
         call.enqueue(new Callback<List<Produto>>() {
             @Override
-            public void onResponse(Call<List<Produto>> call, Response <List<Produto>> response) {
+            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
                     prod = response.body();
                     Log.i("Lista de Jogos", String.valueOf(prod));
 
+                    //mostra dados na tela
+                    /*Picasso.get().load(prod.getImgCapa()).into(imgProd);
+                    textNomeProd.setText(prod.get(position).getProdNome());
+                    textCat.setText(prod.getProdTipo());
+                    textDateLanc.setText(prod.getProdAnoLanc());
+                    textDesc.setText(prod.getProdDesc());*/
                 }
             }
 
@@ -70,5 +90,10 @@ public class DetelhesProd extends AppCompatActivity {
                 Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
             }
         });
+    }
+
+    public  void TelaHome(){
+        Intent TelaHome = new Intent(getApplicationContext(), Home.class);
+        startActivity(TelaHome);
     }
 }

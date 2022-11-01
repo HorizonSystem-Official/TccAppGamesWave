@@ -21,8 +21,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HomeFragment extends Fragment {
-    private final String URL = "https://oldsparklyboat45.conveyor.cloud/api/Produto/";
+public class HomeFragment extends Fragment implements RecyclerViewInterface{
 
     private Retrofit retrofitHomeProd;
 
@@ -30,16 +29,21 @@ public class HomeFragment extends Fragment {
      AdapterHomeRecycler adapter;
      public  RecyclerView recyclerView;
 
+     String LinkApi;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        String URL="https://funshinybook65.conveyor.cloud/api/Produto/";
         produtoList = new ArrayList<>();
 
         retrofitHomeProd = new Retrofit.Builder()
                 .baseUrl(URL)                                       //endere-ço do webservice
                 .addConverterFactory(GsonConverterFactory.create()) //conversor
                 .build();
+
         //lista os jogos
         MostraProds();
     }
@@ -61,7 +65,7 @@ public class HomeFragment extends Fragment {
         //inicia o recyclerView
         recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCat);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        adapter = new AdapterHomeRecycler(getContext(), produtoList);
+        adapter = new AdapterHomeRecycler(getContext(), produtoList, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setFocusable(false);
         recyclerView.setVisibility(View.VISIBLE);
@@ -99,5 +103,17 @@ public class HomeFragment extends Fragment {
     public  void DetelhesProd(){
         Intent DetelhesProd = new Intent(getActivity(), DetelhesProd.class);
         startActivity(DetelhesProd);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Log.i("Lista de Jogos", String.valueOf(produtoList.get(position).getCodProd()));
+
+        int codProduto=produtoList.get(position).getCodProd();
+
+        Intent AbreProd = new Intent(getActivity(), DetelhesProd.class);
+        AbreProd.putExtra("codProduto",codProduto);
+
+        startActivity(AbreProd);
     }
 }

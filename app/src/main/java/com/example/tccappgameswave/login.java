@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 public class login extends AppCompatActivity {
 
+    String LinkApi="https://funshinybook65.conveyor.cloud/api/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,16 +44,19 @@ public class login extends AppCompatActivity {
 
     public  void TelaMudaSenha(){
         Intent MudaSenha = new Intent(getApplicationContext(), esqueceuAsenha.class);
+        MudaSenha.putExtra("LinkApi",LinkApi);
         startActivity(MudaSenha);
     }
 
     public  void TelaCriaConta(){
         Intent CriaConta = new Intent(getApplicationContext(),cadastroCliente.class);
+        CriaConta.putExtra("LinkApi",LinkApi);
         startActivity(CriaConta);
     }
 
     public  void TelaHome(){
         Intent Home = new Intent(getApplicationContext(),Home.class);
+        Home.putExtra("LinkApi",LinkApi);
         startActivity(Home);
     }
 }

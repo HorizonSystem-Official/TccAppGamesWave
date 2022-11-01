@@ -21,6 +21,8 @@
     <string name="TxtCat">categoria</string>
     <string name="TxtLanc">Lançamentos</string>
 
+    <string name="TxtAddCarrinho">Adiconar ao Carrinho</string>
+
 
     <!--texto menu -->
     <string name="TxtPedidos">Meus pedidos</string>
