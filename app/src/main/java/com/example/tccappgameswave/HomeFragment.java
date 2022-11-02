@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
      AdapterHomeRecycler adapter;
      public  RecyclerView recyclerView;
 
-    String URL="https://lostorangephone79.conveyor.cloud/api/Produto/";
+    String LinkApi;
+    String URL=LinkApi+"Produto/";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
+        readDataLinkApi();
 
         View banner=(View) view.findViewById(R.id.banner);
         banner.setOnClickListener(new View.OnClickListener() {
@@ -113,5 +117,24 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         AbreProd.putExtra("codProduto",codProduto);
 
         startActivity(AbreProd);
+    }
+
+    //ler Link Da api da memoria
+    private void readDataLinkApi() {
+        try {
+            FileInputStream fin = getActivity().openFileInput("LinkApi.txt");
+            int a;
+            //constroi a string letra por letra
+            StringBuilder temp = new StringBuilder();
+            while ((a = fin.read()) != -1) {
+                temp.append((char)a);
+            }
+
+            LinkApi=temp.toString();
+            fin.close();//fecha busca
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

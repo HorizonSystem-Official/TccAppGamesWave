@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,10 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
     AdapterListItensRecycler adapter;
     public RecyclerView recyclerItemCarrinho;
 
-    String URL="https://lostorangephone79.conveyor.cloud/api/Carrinho/";
+    String sCpf;
+
+    String LinkApi;
+    String URL=LinkApi+"Carrinho/";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,9 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_lista__compras_, container, false);
 
+        readDataLinkApi();
+        readDataCpf();
+
         //inicia o recyclerView
         recyclerItemCarrinho=(RecyclerView)view.findViewById(R.id.ListItensCarrinho);
         recyclerItemCarrinho.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -67,9 +75,6 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
     }
 
     private void MostraItemCarrinho() {
-        //pega o cpf
-        String sCpf = "333.333.333-33";
-
         //pesquisa
         RESTService restService = retrofitItensCarrinho.create(RESTService.class);
         Call<List<ItemCarrinho>> call= restService.ItensCarrinho(sCpf);
@@ -94,5 +99,44 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
     @Override
     public void onItemClick(int position) {
         Log.i("Lista de Jogos", String.valueOf(ItemCarrinhoList.get(position).getCodProd()));
+    }
+
+    //ler Link Da api da memoria
+    private void readDataLinkApi() {
+        try {
+            FileInputStream fin = getActivity().openFileInput("LinkApi.txt");
+            int a;
+            //constroi a string letra por letra
+            StringBuilder temp = new StringBuilder();
+            while ((a = fin.read()) != -1) {
+                temp.append((char)a);
+            }
+
+            LinkApi=temp.toString();
+            fin.close();//fecha busca
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //ler cpf da memoria
+    private void readDataCpf() {
+        try {
+            FileInputStream fin = getActivity().openFileInput("CodUser.txt");
+            int a;
+            //constroi a string letra por letra
+            StringBuilder temp = new StringBuilder();
+            while ((a = fin.read()) != -1)
+            {
+                temp.append((char)a);
+            }
+
+            sCpf=temp.toString();
+            fin.close();//fecha busca
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

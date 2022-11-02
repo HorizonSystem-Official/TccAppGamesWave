@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,7 +25,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DetelhesProd extends AppCompatActivity {
-    private final String URL = "https://lostorangephone79.conveyor.cloud/api/Produto/";
+
+    String LinkApi;
+    String URL=LinkApi+"Produto/";
 
     private Retrofit retrofitProd;
     Produto prod;
@@ -45,10 +49,13 @@ public class DetelhesProd extends AppCompatActivity {
          textDateLanc =(TextView) findViewById(R.id.textViewDateLanc);
          textDesc =(TextView) findViewById(R.id.textViewDesc);
 
+        readDataLinkApi();
+
         retrofitProd = new Retrofit.Builder()
                 .baseUrl(URL)                                       //endereço do webservice
                 .addConverterFactory(GsonConverterFactory.create()) //conversor
                 .build();
+
         //lista os jogos
         MostraUmProd();
 
@@ -114,6 +121,25 @@ public class DetelhesProd extends AppCompatActivity {
         int codFragment=1;
         TelaHome.putExtra("codFragment",codFragment);
         startActivity(TelaHome);
+    }
+
+    //ler Link Da api da memoria
+    private void readDataLinkApi() {
+        try {
+            FileInputStream fin = openFileInput("LinkApi.txt");
+            int a;
+            //constroi a string letra por letra
+            StringBuilder temp = new StringBuilder();
+            while ((a = fin.read()) != -1) {
+                temp.append((char)a);
+            }
+
+            LinkApi=temp.toString();
+            fin.close();//fecha busca
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

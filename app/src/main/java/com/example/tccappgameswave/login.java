@@ -2,20 +2,26 @@ package com.example.tccappgameswave;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class login extends AppCompatActivity {
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-    String LinkApi="https://funshinybook65.conveyor.cloud/api/";
+public class login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        readDataLinkApi();
 
         TextView txtEsqueceu = (TextView) findViewById(R.id.txtEsqueceu);
         txtEsqueceu.setOnClickListener(new View.OnClickListener() {
@@ -44,19 +50,54 @@ public class login extends AppCompatActivity {
 
     public  void TelaMudaSenha(){
         Intent MudaSenha = new Intent(getApplicationContext(), esqueceuAsenha.class);
-        MudaSenha.putExtra("LinkApi",LinkApi);
         startActivity(MudaSenha);
+        gravaDataCpf();
     }
 
     public  void TelaCriaConta(){
         Intent CriaConta = new Intent(getApplicationContext(),cadastroCliente.class);
-        CriaConta.putExtra("LinkApi",LinkApi);
         startActivity(CriaConta);
     }
 
     public  void TelaHome(){
         Intent Home = new Intent(getApplicationContext(),Home.class);
-        Home.putExtra("LinkApi",LinkApi);
         startActivity(Home);
+    }
+
+    //ler aquivo da memoria
+    private void readDataLinkApi() {
+        try {
+            FileInputStream fin = openFileInput("LinkApi.txt");
+            int a;
+            //constroi a string letra por letra
+            StringBuilder temp = new StringBuilder();
+            while ((a = fin.read()) != -1)
+            {
+                temp.append((char)a);
+            }
+
+            String LinkApi=temp.toString();
+            Log.d("Link",LinkApi);
+            fin.close();//fecha busca
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String fileCodUser = "CodUser.txt";
+    //escreve na memoria
+    private void gravaDataCpf(){
+        try {
+            FileOutputStream fos = openFileOutput(fileCodUser, Context.MODE_PRIVATE);
+            String dataCpfCli = "333.333.333-33";
+            //trnforma em byter e grava
+            fos.write(dataCpfCli.getBytes());
+            fos.flush();
+            fos.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
