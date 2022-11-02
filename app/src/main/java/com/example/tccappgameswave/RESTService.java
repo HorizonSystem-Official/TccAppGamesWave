@@ -10,6 +10,11 @@ public interface RESTService {
     @GET("prodCategoria?")
     Call<List<Produto>> MostraProdPorCat(@Query("cat") String cat);
 
-    @GET("umProdSimples?")
-    Call<List<Produto>> MostraProdDetalhes(@Query("idProd") int codProd);
+    @GET("ProdDetalhado?")
+    Call<Produto> MostraProdDetalhes(@Query("idProd") int codProd);
+
+    //carrinho
+    @GET("ItensCarrinho?")
+    Call<List<ItemCarrinho>> ItensCarrinho(@Query("cpf") String cpf);
+
 }

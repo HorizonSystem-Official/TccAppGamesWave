@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="340dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/borda_aredondada"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:padding="5dp"
+    android:backgroundTint="@color/BaseRoxoescuro">
+
+
+    <ImageView
+        android:id="@+id/imageViewProdItem"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/game_wave_logo" />
+
+    <TextView
+        android:id="@+id/textViewNomeProdItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:gravity="start"
+        android:text="gta"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewProdItem"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewQtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:text="Quantidade: 1"
+        app:layout_constraintStart_toEndOf="@+id/imageViewProdItem"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomeProdItem" />
+
+    <TextView
+        android:id="@+id/textViewTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="25.99"
+        android:gravity="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

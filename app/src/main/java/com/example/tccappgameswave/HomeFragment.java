@@ -29,14 +29,13 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
      AdapterHomeRecycler adapter;
      public  RecyclerView recyclerView;
 
-     String LinkApi;
+    String URL="https://lostorangephone79.conveyor.cloud/api/Produto/";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        String URL="https://funshinybook65.conveyor.cloud/api/Produto/";
         produtoList = new ArrayList<>();
 
         retrofitHomeProd = new Retrofit.Builder()
@@ -87,9 +86,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                 if (response.isSuccessful()) {
                     produtoList = response.body();
                     adapter.setMovieList(produtoList);
-                    Log.i("Lista de Jogos", String.valueOf(produtoList));
-
-
+                    //Log.i("Lista de Jogos", String.valueOf(produtoList));
                 }
             }
 
@@ -105,6 +102,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         startActivity(DetelhesProd);
     }
 
+    //abre os detalhes do produto
     @Override
     public void onItemClick(int position) {
         Log.i("Lista de Jogos", String.valueOf(produtoList.get(position).getCodProd()));

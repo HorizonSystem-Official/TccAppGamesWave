@@ -2,6 +2,8 @@ package com.example.tccappgameswave;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,10 +23,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DetelhesProd extends AppCompatActivity {
-    private final String URL = "https://funshinybook65.conveyor.cloud/api/Produto/";
+    private final String URL = "https://lostorangephone79.conveyor.cloud/api/Produto/";
 
     private Retrofit retrofitProd;
-    List<Produto> prod;
+    Produto prod;
 
     ImageView imgProd;
     TextView textNomeProd;
@@ -50,11 +52,21 @@ public class DetelhesProd extends AppCompatActivity {
         //lista os jogos
         MostraUmProd();
 
+        //volta
         ImageView btnVoltarHome = (ImageView) findViewById(R.id.imageViewVoltarHome);
         btnVoltarHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TelaHome();
+            }
+        });
+
+        //adiciona ao carrinho
+        Button btnAddCarrinho = (Button) findViewById(R.id.btnAddCarrinho);
+        btnAddCarrinho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InsertItem();
             }
         });
     }
@@ -65,28 +77,28 @@ public class DetelhesProd extends AppCompatActivity {
 
         //pesquisa
         RESTService restService = retrofitProd.create(RESTService.class);
-        Call<List<Produto>> call= restService.MostraProdDetalhes(codProd);
-
+        Call<Produto> call= restService.MostraProdDetalhes(codProd);
 
         //executa e mostra a requisisao
-        call.enqueue(new Callback<List<Produto>>() {
+        call.enqueue(new Callback<Produto>() {
             @Override
-            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
+            public void onResponse(Call<Produto> call, Response<Produto> response) {
                 if (response.isSuccessful()) {
-                    prod = response.body();
-                    Log.i("Lista de Jogos", String.valueOf(prod));
+
+                    prod=response.body();
+                    //Log.i("Lista de Jogos", String.valueOf(prod));
 
                     //mostra dados na tela
-                    /*Picasso.get().load(prod.getImgCapa()).into(imgProd);
-                    textNomeProd.setText(prod.get(position).getProdNome());
+                    Picasso.get().load(prod.getImgCapa()).into(imgProd);
+                    textNomeProd.setText(prod.getProdNome());
                     textCat.setText(prod.getProdTipo());
                     textDateLanc.setText(prod.getProdAnoLanc());
-                    textDesc.setText(prod.getProdDesc());*/
+                    textDesc.setText(prod.getProdDesc());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Produto>> call, Throwable t) {
+            public void onFailure(Call<Produto> call, Throwable t) {
                 Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
             }
         });
@@ -96,4 +108,12 @@ public class DetelhesProd extends AppCompatActivity {
         Intent TelaHome = new Intent(getApplicationContext(), Home.class);
         startActivity(TelaHome);
     }
+
+    public  void InsertItem(){
+        Intent TelaHome = new Intent(getApplicationContext(), Home.class);
+        int codFragment=1;
+        TelaHome.putExtra("codFragment",codFragment);
+        startActivity(TelaHome);
+    }
+
 }

@@ -88,7 +88,6 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
                 @Override
                 public void onClick(View view) {
                    if(recyclerViewInterface!=null){
-                       Log.d("Click list","teste");
                        int pos=getAdapterPosition();
 
                        if(pos!=RecyclerView.NO_POSITION){

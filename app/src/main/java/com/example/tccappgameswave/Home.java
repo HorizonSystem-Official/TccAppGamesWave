@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
@@ -38,9 +39,22 @@ public class Home extends AppCompatActivity implements
 
         toggle.syncState();
 
-        //inicia na home
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
+        //codigo da fragment
+        Intent intent = getIntent();
+        int codFragment = intent.getIntExtra("codFragment",0);
+
+        if(codFragment==1){
+            //inicia na list
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new Lista_Compras_Fragment()).commit();
+        }
+
+        else {
+            //inicia na home
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment()).commit();
+        }
+
     }
 
     //muda tela
