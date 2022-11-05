@@ -7,23 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".DetelhesProd">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/imageViewVoltarHome"
         android:layout_width="36dp"
         android:layout_height="36dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="15dp"
+        android:layout_margin="10dp"
         app:srcCompat="@drawable/seta_voltar" />
 
-    <ImageView
-        android:id="@+id/imgviewProd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewVoltarHome"
-        app:srcCompat="@drawable/logogameswave" />
+            <ImageView
+                android:id="@+id/imgviewProd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logogameswave" />
 
     <TextView
         android:id="@+id/textViewNomeProduto"
@@ -114,6 +122,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPreco" />
 
+    <TextView
+        android:id="@+id/textViewComentario"
+        style="@style/TxtPadraoTxtClaro"
+        android:text="Comentraios"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddCarrinho" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewComentario"
+        style="@style/Theme.MaterialComponents.DayNight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/BaseRoxo"
+        android:divider="@color/Cinza"
+        android:paddingTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewComentario" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

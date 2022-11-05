@@ -31,17 +31,18 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
     public RecyclerView recyclerItemCarrinho;
 
     String sCpf;
-
     String LinkApi;
-    String URL=LinkApi+"Carrinho/";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ItemCarrinhoList = new ArrayList<>();
 
+        readDataLinkApi();
+        readDataCpf();
+
         retrofitItensCarrinho = new Retrofit.Builder()
-                .baseUrl(URL)                                       //endere-ço do webservice
+                .baseUrl(LinkApi+"Carrinho/")                                       //endere-ço do webservice
                 .addConverterFactory(GsonConverterFactory.create()) //conversor
                 .build();
 
@@ -54,9 +55,6 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_lista__compras_, container, false);
-
-        readDataLinkApi();
-        readDataCpf();
 
         //inicia o recyclerView
         recyclerItemCarrinho=(RecyclerView)view.findViewById(R.id.ListItensCarrinho);
@@ -78,6 +76,7 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
         //pesquisa
         RESTService restService = retrofitItensCarrinho.create(RESTService.class);
         Call<List<ItemCarrinho>> call= restService.ItensCarrinho(sCpf);
+        Log.i("Lista de Jogos", sCpf);
         //executa e mostra a requisisao
         call.enqueue(new Callback<List<ItemCarrinho>>() {
             @Override

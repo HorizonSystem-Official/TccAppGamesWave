@@ -29,6 +29,10 @@ public class ItemCarrinho {
     @Expose
     public String ValorTotal;
 
+    public ItemCarrinho(int codProd, int qtnProd, String cpf) {
+
+    }
+
 
     public String getProdNome() {
         return ProdNome;

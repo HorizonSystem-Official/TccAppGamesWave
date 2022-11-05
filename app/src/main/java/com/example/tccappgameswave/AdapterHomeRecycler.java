@@ -57,8 +57,8 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
 
         String prodNome =produtoList.get(position).getProdNome();
 
-        if(prodNome.length()>10){
-            holder.txtViewProdNome.setText(prodNome.substring(1, 8)+"...");
+        if(prodNome.length()>14){
+            holder.txtViewProdNome.setText(prodNome.substring(0, 8)+"...");
         }else {
             holder.txtViewProdNome.setText(prodNome);
         }

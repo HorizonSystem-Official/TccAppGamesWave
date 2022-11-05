@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,6 +33,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
      List<Produto> produtoList;
      AdapterHomeRecycler adapter;
      public  RecyclerView recyclerView;
+     public  ImageView banner;
 
     String LinkApi;
     String URL=LinkApi+"Produto/";
@@ -37,12 +41,12 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        readDataLinkApi();
 
         produtoList = new ArrayList<>();
 
         retrofitHomeProd = new Retrofit.Builder()
-                .baseUrl(URL)                                       //endere-ço do webservice
+                .baseUrl(LinkApi+"Produto/")                                       //endere-ço do webservice
                 .addConverterFactory(GsonConverterFactory.create()) //conversor
                 .build();
 
@@ -55,15 +59,20 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
-        readDataLinkApi();
 
-        View banner=(View) view.findViewById(R.id.banner);
+        ImageView banner=(ImageView) view.findViewById(R.id.banner);
         banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DetelhesProd();
             }
         });
+
+        Picasso.get()
+                .load("https://www.brickfanatics.com/wp-content/uploads/LEGO-Star-Wars-The-Skywalker-Saga-glitched-title-screen-800x445.jpg")
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.ic_launcher_round)
+                .into(banner);
 
         //inicia o recyclerView
         recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCat);
