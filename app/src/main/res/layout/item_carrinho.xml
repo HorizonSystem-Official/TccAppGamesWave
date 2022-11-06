@@ -15,14 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageButton
+<!--            <ImageButton
                 android:id="@+id/imageViewProdDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#00FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_delete" />
+                app:srcCompat="@android:drawable/ic_delete" />-->
 
             <ImageView
                 android:id="@+id/imageViewProdItem"

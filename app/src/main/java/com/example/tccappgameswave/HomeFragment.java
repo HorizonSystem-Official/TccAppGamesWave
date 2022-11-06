@@ -30,20 +30,21 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
 
     private Retrofit retrofitHomeProd;
 
-     List<Produto> produtoList;
-     AdapterHomeRecycler adapter;
-     public  RecyclerView recyclerView;
+     List<Produto> produtoListTiro,produtoListTerror,produtoListRPG;
+     AdapterHomeRecycler adapterTiro, adapterTerror, adapterRPG;
+     public  RecyclerView recyclerViewTiro, recyclerViewTerror, recyclerViewRPG;
      public  ImageView banner;
 
     String LinkApi;
-    String URL=LinkApi+"Produto/";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         readDataLinkApi();
 
-        produtoList = new ArrayList<>();
+        produtoListTiro = new ArrayList<>();
+        produtoListTerror = new ArrayList<>();
+        produtoListRPG = new ArrayList<>();
 
         retrofitHomeProd = new Retrofit.Builder()
                 .baseUrl(LinkApi+"Produto/")                                       //endere-ço do webservice
@@ -51,7 +52,9 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                 .build();
 
         //lista os jogos
-        MostraProds();
+        MostraProdsTiro();
+        MostraProdsRPG();
+        MostraProdsTerror();
     }
 
     @Override
@@ -75,17 +78,26 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                 .into(banner);
 
         //inicia o recyclerView
-        recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCat);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        adapter = new AdapterHomeRecycler(getContext(), produtoList, this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setFocusable(false);
-        recyclerView.setVisibility(View.VISIBLE);
+        recyclerViewTiro=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCatTiro);
+        recyclerViewTerror=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCatTerror);
+        recyclerViewRPG=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCatRPG);
+
+        recyclerViewTiro.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewTerror.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewRPG.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        adapterTiro = new AdapterHomeRecycler(getContext(), produtoListTiro, this);
+        adapterTerror = new AdapterHomeRecycler(getContext(), produtoListTerror, this);
+        adapterRPG = new AdapterHomeRecycler(getContext(), produtoListRPG, this);
+
+        recyclerViewTiro.setAdapter(adapterTiro);
+        recyclerViewTerror.setAdapter(adapterTerror);
+        recyclerViewRPG.setAdapter(adapterRPG);
 
         return view;
     }
 
-    private void MostraProds() {
+    private void MostraProdsTiro() {
         //pega categoria
         String sCat = "Tiro";
 
@@ -97,9 +109,56 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
-                    produtoList = response.body();
-                    adapter.setMovieList(produtoList);
-                    //Log.i("Lista de Jogos", String.valueOf(produtoList));
+                    produtoListTiro = response.body();
+                    adapterTiro.setMovieList(produtoListTiro);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Produto>> call, Throwable t) {
+                Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
+            }
+        });
+    }
+
+    private void MostraProdsRPG() {
+        //pega categoria
+        String sCat = "RPG";
+
+        //pesquisa
+        RESTService restService = retrofitHomeProd.create(RESTService.class);
+        Call<List<Produto>> call= restService.MostraProdPorCat(sCat);
+        //executa e mostra a requisisao
+        call.enqueue(new Callback<List<Produto>>() {
+            @Override
+            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
+                if (response.isSuccessful()) {
+                    produtoListTerror = response.body();
+                    adapterRPG.setMovieList(produtoListTerror);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Produto>> call, Throwable t) {
+                Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
+            }
+        });
+    }
+
+    private void MostraProdsTerror() {
+        //pega categoria
+        String sCat = "Terror";
+
+        //pesquisa
+        RESTService restService = retrofitHomeProd.create(RESTService.class);
+        Call<List<Produto>> call= restService.MostraProdPorCat(sCat);
+        //executa e mostra a requisisao
+        call.enqueue(new Callback<List<Produto>>() {
+            @Override
+            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
+                if (response.isSuccessful()) {
+                    produtoListRPG = response.body();
+                    adapterTerror.setMovieList(produtoListRPG);
                 }
             }
 
@@ -112,20 +171,36 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
 
     public  void DetelhesProd(){
         Intent DetelhesProd = new Intent(getActivity(), DetelhesProd.class);
+        DetelhesProd.putExtra("codProduto",3);
         startActivity(DetelhesProd);
     }
 
     //abre os detalhes do produto
     @Override
     public void onItemClick(int position) {
-        Log.i("Lista de Jogos", String.valueOf(produtoList.get(position).getCodProd()));
+        //
+        // int codProduto = 0;
 
-        int codProduto=produtoList.get(position).getCodProd();
+        //codProduto=produtoList.get(position).getCodProd();
 
-        Intent AbreProd = new Intent(getActivity(), DetelhesProd.class);
-        AbreProd.putExtra("codProduto",codProduto);
+        if(produtoListTiro.get(position).getCodProd()==null){
+            Log.i("cod prod que abre:", String.valueOf(produtoListTiro.get(position).getCodProd()));
+        }
+        else if(produtoListTerror.get(position).getCodProd()==null){
+            Log.i("cod prod que abre:", String.valueOf(produtoListTerror.get(position).getCodProd()));
+        }
 
-        startActivity(AbreProd);
+        else if(produtoListRPG.get(position).getCodProd()==null){
+            Log.i("cod prod que abre:", String.valueOf(produtoListRPG.get(position).getCodProd()));
+        }
+        else {
+            Log.i("cod prod que abre:","nada");
+        }
+
+        //Intent AbreProd = new Intent(getActivity(), DetelhesProd.class);
+        //AbreProd.putExtra("codProduto",codProduto);
+
+       // startActivity(AbreProd);
     }
 
     //ler Link Da api da memoria

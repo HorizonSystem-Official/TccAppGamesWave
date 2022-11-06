@@ -29,6 +29,10 @@ public class ItemCarrinho {
     @Expose
     public String ValorTotal;
 
+    @SerializedName("ImgCapa")
+    @Expose
+    public String ImgCapa;
+
     public ItemCarrinho(int codProd, int qtnProd, String cpf) {
 
     }
@@ -80,5 +84,13 @@ public class ItemCarrinho {
 
     public void setValorTotal(String valorTotal) {
         ValorTotal = valorTotal;
+    }
+
+    public String getImgCapa() {
+        return ImgCapa;
+    }
+
+    public void setImgCapa(String imgCapa) {
+        ImgCapa = imgCapa;
     }
 }

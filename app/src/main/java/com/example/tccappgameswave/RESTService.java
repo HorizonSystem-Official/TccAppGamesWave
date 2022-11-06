@@ -19,6 +19,10 @@ public interface RESTService {
     @GET("ItensCarrinho?")
     Call<List<ItemCarrinho>> ItensCarrinho(@Query("cpf") String cpf);
 
+    //valor total carrinho
+    @GET("TotalCarrinho?")
+    Call<Carrinho> valorTotalCarrrinho(@Query("cpf") String cpf);
+
     //comentarios
     @GET("ComentariosProd?")
     Call<List<Comentario>> ListComentarios(@Query("idProd") int idProd);

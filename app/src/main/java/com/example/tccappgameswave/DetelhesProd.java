@@ -31,7 +31,6 @@ public class DetelhesProd extends AppCompatActivity {
 
     String LinkApi;
     String cpf;
-    String URL=LinkApi+"Produto/";
 
     private Retrofit retrofitProd, retrofitComent;
 
@@ -52,6 +51,9 @@ public class DetelhesProd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detelhes_prod);
 
+        readDataLinkApi();
+        readDataCpf();
+
          imgProd = (ImageView) findViewById(R.id.imgviewProd);
          textNomeProd =(TextView) findViewById(R.id.textViewNomeProduto);
          textCat =(TextView) findViewById(R.id.textViewCat);
@@ -66,9 +68,6 @@ public class DetelhesProd extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setFocusable(false);
         recyclerView.setVisibility(View.VISIBLE);
-
-        readDataLinkApi();
-        readDataCpf();
 
         //mostra prod
         retrofitProd = new Retrofit.Builder()
@@ -102,15 +101,14 @@ public class DetelhesProd extends AppCompatActivity {
         btnAddCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InsertItem();
+                AddItemCar(2,1,"333.333.333-33");
             }
         });
     }
 
     private void MostraUmProd() {
         Intent intent = getIntent();
-        int codProd = intent.getIntExtra("codProduto",2);
-        //int codProd = 2;
+        int codProd = intent.getIntExtra("codProduto",0);
 
         //pesquisa
         RESTService restService = retrofitProd.create(RESTService.class);
@@ -178,6 +176,13 @@ public class DetelhesProd extends AppCompatActivity {
             @Override
             public void onResponse(Call<ItemCarrinho> call, Response<ItemCarrinho> response) {
                 ItemCarrinho itemApi=response.body();
+                Log.i("Items do item:", String.valueOf(itemApi));
+
+                //abre tela de lista de carrinho
+                Intent TelaHome = new Intent(getApplicationContext(), Home.class);
+                int codFragment=1;
+                TelaHome.putExtra("codFragment",codFragment);
+                startActivity(TelaHome);
             }
 
             @Override
@@ -193,16 +198,9 @@ public class DetelhesProd extends AppCompatActivity {
     }
 
     public  void InsertItem(){
-        Log.i("items:", String.valueOf(prod.getCodProd()));
-        AddItemCar(prod.CodProd,1,cpf);
-
-        //abre tela de lista de carrinho
-        Intent TelaHome = new Intent(getApplicationContext(), Home.class);
-        int codFragment=1;
-        TelaHome.putExtra("codFragment",codFragment);
-        startActivity(TelaHome);
-
-
+        Log.d("CodUser",cpf);
+        Log.d("items:", String.valueOf(prod.getCodProd()));
+        AddItemCar(prod.getCodProd(),1,cpf);
     }
 
     //ler Link Da api da memoria
@@ -235,8 +233,7 @@ public class DetelhesProd extends AppCompatActivity {
                 temp.append((char)a);
             }
 
-            String cpf=temp.toString();
-            Log.d("CodUser",cpf);
+            cpf=temp.toString();
             fin.close();//fecha busca
         }
         catch (IOException e) {

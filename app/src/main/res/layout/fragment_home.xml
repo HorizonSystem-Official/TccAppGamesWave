@@ -36,25 +36,82 @@
 
 
         <TextView
-            android:id="@+id/txtViewLanc"
+            android:id="@+id/txtViewTiro"
             style="@style/TxtPadraoTxtClaro"
-            android:text="@string/TxtLanc"
+            android:text="@string/TxtTiro"
+            android:textStyle="bold"
             android:layout_marginStart="21dp"
             android:layout_marginBottom="25dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/line_1" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_ProdCat"
+            android:id="@+id/recyclerview_ProdCatTiro"
             android:layout_width="wrap_content"
             android:layout_height="280dp"
             android:orientation="horizontal"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewLanc"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewTiro"
             tools:listitem="@layout/produto_item"
             tools:visibility="visible" />
 
+        <View
+            android:id="@+id/line_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"
+            android:layout_margin="17dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_ProdCatTiro" />
+
+        <TextView
+            android:id="@+id/txtViewTerror"
+            style="@style/TxtPadraoTxtClaro"
+            android:layout_marginStart="21dp"
+            android:textStyle="bold"
+            android:text="@string/TxtTerror"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_2" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_ProdCatTerror"
+            android:layout_width="wrap_content"
+            android:layout_height="280dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewTerror"
+            tools:listitem="@layout/produto_item"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/line_3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"
+            android:layout_margin="17dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_ProdCatTerror" />
+
+        <TextView
+            android:id="@+id/txtViewRPG"
+            style="@style/TxtPadraoTxtClaro"
+            android:layout_marginStart="21dp"
+            android:textStyle="bold"
+            android:text="@string/TxtRPG"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_3" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_ProdCatRPG"
+            android:layout_width="wrap_content"
+            android:layout_height="280dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewRPG"
+            tools:listitem="@layout/produto_item"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </FrameLayout>

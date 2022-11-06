@@ -43,11 +43,11 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
     @Override
     public void onBindViewHolder(@NonNull AdapterListItensRecycler.ItemViewHolder holder, int position) {
 //define da onde vem os valores
-//        Picasso.get()
-//                .load(ItemCarrinhoList.get(position).g())
-//                .placeholder(R.mipmap.ic_launcher_round)
-//                .error(R.mipmap.ic_launcher_round)
-//                .into(holder.imgProdItem);
+        Picasso.get()
+                .load(ItemCarrinhoList.get(position).getImgCapa())
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.ic_launcher_round)
+                .into(holder.imgProdItem);
 
         holder.textNomeProdItem.setText(ItemCarrinhoList.get(position).getProdNome());
         holder.textQtn.setText("Quantidade: "+ItemCarrinhoList.get(position).getQtnProd());

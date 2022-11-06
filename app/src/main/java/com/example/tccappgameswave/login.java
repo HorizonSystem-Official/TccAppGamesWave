@@ -16,12 +16,15 @@ import java.io.IOException;
 
 public class login extends AppCompatActivity {
 
+    private String fileCodUser = "CodUser.txt";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         readDataLinkApi();
+        gravaDataCpf();
 
         TextView txtEsqueceu = (TextView) findViewById(R.id.txtEsqueceu);
         txtEsqueceu.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +80,6 @@ public class login extends AppCompatActivity {
             }
 
             String LinkApi=temp.toString();
-            Log.d("Link",LinkApi);
             fin.close();//fecha busca
         }
         catch (IOException e) {
@@ -85,7 +87,6 @@ public class login extends AppCompatActivity {
         }
     }
 
-    private String fileCodUser = "CodUser.txt";
     //escreve na memoria
     private void gravaDataCpf(){
         try {
