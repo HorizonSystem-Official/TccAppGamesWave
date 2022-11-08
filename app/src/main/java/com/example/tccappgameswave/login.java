@@ -8,23 +8,46 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class login extends AppCompatActivity {
 
     private String fileCodUser = "CodUser.txt";
+    String LinkApi;
+    Retrofit retrofitLoginCli;
+    EditText emailEdt,senhaEdt;
+    Cliente cli;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+         emailEdt =(EditText) findViewById(R.id.editUserLogin);
+         senhaEdt =(EditText) findViewById(R.id.EditSenhaLogin);
+
         readDataLinkApi();
         gravaDataCpf();
+        LoginCli();
+
+        //add item
+        retrofitLoginCli= new Retrofit.Builder()
+                .baseUrl(LinkApi+"Cliente/").
+                addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         TextView txtEsqueceu = (TextView) findViewById(R.id.txtEsqueceu);
         txtEsqueceu.setOnClickListener(new View.OnClickListener() {
@@ -63,8 +86,36 @@ public class login extends AppCompatActivity {
     }
 
     public  void TelaHome(){
+        //LoginCli(emailEdt.getText().toString(), senhaEdt.getText().toString());
+        //LoginCli("Jularia@gmail.com", "123456");
+
         Intent Home = new Intent(getApplicationContext(),Home.class);
         startActivity(Home);
+    }
+
+    private void LoginCli() {
+        //pesquisa
+        String email="Jularia@gmail.com";
+        String senha="123456";
+
+        RESTService restService = retrofitLoginCli.create(RESTService.class);
+        Call<Cliente> call= restService.LoginCliente(email, senha);
+
+        //executa e mostra a requisisao
+        call.enqueue(new Callback<Cliente>() {
+            @Override
+            public void onResponse(Call<Cliente> call, Response<Cliente> response) {
+                if (response.isSuccessful()) {
+                    cli=response.body();
+                    //Log.i("Lista de Jogos", cli.getCPF());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cliente> call, Throwable t) {
+                Log.i("Ocorreu um erro ao tentar entrar. Erro:", t.getMessage());
+            }
+        });
     }
 
     //ler aquivo da memoria
@@ -79,7 +130,7 @@ public class login extends AppCompatActivity {
                 temp.append((char)a);
             }
 
-            String LinkApi=temp.toString();
+            LinkApi=temp.toString();
             fin.close();//fecha busca
         }
         catch (IOException e) {

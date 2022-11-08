@@ -31,7 +31,10 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
     private Retrofit retrofitHomeProd;
 
      List<Produto> produtoListTiro,produtoListTerror,produtoListRPG;
+     List<Produto> produtoList;
+
      AdapterHomeRecycler adapterTiro, adapterTerror, adapterRPG;
+     AdapterHomeRecycler adapter;
      public  RecyclerView recyclerViewTiro, recyclerViewTerror, recyclerViewRPG;
      public  ImageView banner;
 
@@ -45,6 +48,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         produtoListTiro = new ArrayList<>();
         produtoListTerror = new ArrayList<>();
         produtoListRPG = new ArrayList<>();
+        produtoList = new ArrayList<>();
 
         retrofitHomeProd = new Retrofit.Builder()
                 .baseUrl(LinkApi+"Produto/")                                       //endere-ço do webservice
@@ -86,11 +90,11 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         recyclerViewTerror.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewRPG.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        adapterTiro = new AdapterHomeRecycler(getContext(), produtoListTiro, this);
-        adapterTerror = new AdapterHomeRecycler(getContext(), produtoListTerror, this);
         adapterRPG = new AdapterHomeRecycler(getContext(), produtoListRPG, this);
+        adapterTerror = new AdapterHomeRecycler(getContext(), produtoListTerror, this);
+        adapter = new AdapterHomeRecycler(getContext(), produtoList, this);
 
-        recyclerViewTiro.setAdapter(adapterTiro);
+        recyclerViewTiro.setAdapter(adapter);
         recyclerViewTerror.setAdapter(adapterTerror);
         recyclerViewRPG.setAdapter(adapterRPG);
 
@@ -109,8 +113,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
-                    produtoListTiro = response.body();
-                    adapterTiro.setMovieList(produtoListTiro);
+                    produtoList = response.body();
+                    adapter.setMovieList(produtoList);
                 }
             }
 
@@ -133,8 +137,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
-                    produtoListTerror = response.body();
-                    adapterRPG.setMovieList(produtoListTerror);
+                    produtoListRPG = response.body();
+                    adapterRPG.setMovieList(produtoListRPG);
                 }
             }
 
@@ -157,8 +161,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
-                    produtoListRPG = response.body();
-                    adapterTerror.setMovieList(produtoListRPG);
+                    produtoListTerror = response.body();
+                    adapterTerror.setMovieList(produtoListTerror);
                 }
             }
 
@@ -178,12 +182,10 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
     //abre os detalhes do produto
     @Override
     public void onItemClick(int position) {
-        //
-        // int codProduto = 0;
 
-        //codProduto=produtoList.get(position).getCodProd();
+        int codProduto=produtoList.get(position).getCodProd();
 
-        if(produtoListTiro.get(position).getCodProd()==null){
+        /*if(produtoListTiro.get(position).getCodProd()==null){
             Log.i("cod prod que abre:", String.valueOf(produtoListTiro.get(position).getCodProd()));
         }
         else if(produtoListTerror.get(position).getCodProd()==null){
@@ -195,12 +197,11 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         }
         else {
             Log.i("cod prod que abre:","nada");
-        }
+        }*/
 
-        //Intent AbreProd = new Intent(getActivity(), DetelhesProd.class);
-        //AbreProd.putExtra("codProduto",codProduto);
-
-       // startActivity(AbreProd);
+        Intent AbreProd = new Intent(getActivity(), DetelhesProd.class);
+        AbreProd.putExtra("codProduto",codProduto);
+        startActivity(AbreProd);
     }
 
     //ler Link Da api da memoria

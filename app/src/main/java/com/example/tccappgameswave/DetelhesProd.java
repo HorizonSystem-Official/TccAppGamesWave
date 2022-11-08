@@ -32,7 +32,7 @@ public class DetelhesProd extends AppCompatActivity {
     String LinkApi;
     String cpf;
 
-    private Retrofit retrofitProd, retrofitComent;
+    private Retrofit retrofitProd, retrofitComent,retrofitAddItem;
 
     Produto prod;
     List<Comentario> ListComent;
@@ -81,6 +81,12 @@ public class DetelhesProd extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+        //add item
+        retrofitAddItem= new Retrofit.Builder()
+                .baseUrl(LinkApi+"Carrinho/").
+                addConverterFactory(GsonConverterFactory.create())
+                .build();
+
         //lista os jogos
         MostraUmProd();
 
@@ -101,7 +107,7 @@ public class DetelhesProd extends AppCompatActivity {
         btnAddCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddItemCar(2,1,"333.333.333-33");
+                AddItemCar(prod.CodProd, 1,cpf);
             }
         });
     }
@@ -154,7 +160,6 @@ public class DetelhesProd extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ListComent = response.body();
                     adapter.setMovieList(ListComent);
-                    Log.i("Lista de comentarios", String.valueOf(ListComent));
                 }
             }
 
@@ -166,17 +171,15 @@ public class DetelhesProd extends AppCompatActivity {
     }
 
     private  void AddItemCar(int codProd, int QtnProd, String Cpf){
-        Retrofit retrofit= new Retrofit.Builder()
-                .baseUrl(LinkApi+"Carrinho/").addConverterFactory(GsonConverterFactory.create()).build();
 
-        RESTService restService= retrofit.create(RESTService.class);
+        RESTService restService= retrofitAddItem.create(RESTService.class);
         ItemCarrinho item=new ItemCarrinho(codProd,QtnProd, Cpf);
         Call<ItemCarrinho> call= restService.AddItensCarrinho(item);
         call.enqueue(new Callback<ItemCarrinho>() {
             @Override
             public void onResponse(Call<ItemCarrinho> call, Response<ItemCarrinho> response) {
                 ItemCarrinho itemApi=response.body();
-                Log.i("Items do item:", String.valueOf(itemApi));
+                Log.i("Items do item:", String.valueOf(prod.CodProd));
 
                 //abre tela de lista de carrinho
                 Intent TelaHome = new Intent(getApplicationContext(), Home.class);
@@ -195,12 +198,6 @@ public class DetelhesProd extends AppCompatActivity {
     public  void TelaHome(){
         Intent TelaHome = new Intent(getApplicationContext(), Home.class);
         startActivity(TelaHome);
-    }
-
-    public  void InsertItem(){
-        Log.d("CodUser",cpf);
-        Log.d("items:", String.valueOf(prod.getCodProd()));
-        AddItemCar(prod.getCodProd(),1,cpf);
     }
 
     //ler Link Da api da memoria

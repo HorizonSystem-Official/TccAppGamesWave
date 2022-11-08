@@ -32,6 +32,7 @@
         android:paddingStart="48dp"
         android:textColor="@color/colorText"
         android:textSize="16sp"
+        android:text="Jularia@gmail.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -44,6 +45,7 @@
         android:textSize="16sp"
         android:paddingStart="48dp"
         android:hint="@string/TxtSenha"
+        android:text="123456"
         android:textColor="@color/colorText"
         android:inputType="textPassword"
         android:background="@drawable/bg_txt_password"
