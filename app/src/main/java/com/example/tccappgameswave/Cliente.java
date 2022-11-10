@@ -17,7 +17,7 @@ public class Cliente {
 
     @SerializedName("DataNasc")
     @Expose
-    public Date DataNasc ;
+    public String DataNasc ;
 
     @SerializedName("Senha")
     @Expose
@@ -47,11 +47,11 @@ public class Cliente {
         NomeCliente = nomeCliente;
     }
 
-    public Date getDataNasc() {
+    public String getDataNasc() {
         return DataNasc;
     }
 
-    public void setDataNasc(Date dataNasc) {
+    public void setDataNasc(String dataNasc) {
         DataNasc = dataNasc;
     }
 

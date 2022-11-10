@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -27,23 +28,22 @@ public class login extends AppCompatActivity {
 
     private String fileCodUser = "CodUser.txt";
     String LinkApi;
-    Retrofit retrofitLoginCli;
+    private  Retrofit retrofitLoginCli;
     EditText emailEdt,senhaEdt;
     Cliente cli;
+    String dataCpfCli;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         emailEdt =(EditText) findViewById(R.id.editUserLogin);
-         senhaEdt =(EditText) findViewById(R.id.EditSenhaLogin);
-
         readDataLinkApi();
-        gravaDataCpf();
-        LoginCli();
 
-        //add item
+        emailEdt =(EditText) findViewById(R.id.editUserLogin);
+        senhaEdt =(EditText) findViewById(R.id.EditSenhaLogin);
+
+        //faz o login
         retrofitLoginCli= new Retrofit.Builder()
                 .baseUrl(LinkApi+"Cliente/").
                 addConverterFactory(GsonConverterFactory.create())
@@ -69,7 +69,8 @@ public class login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TelaHome();
+                //consuta se user existe
+                LoginCli(emailEdt.getText().toString(), senhaEdt.getText().toString());
             }
         });
     }
@@ -85,21 +86,10 @@ public class login extends AppCompatActivity {
         startActivity(CriaConta);
     }
 
-    public  void TelaHome(){
-        //LoginCli(emailEdt.getText().toString(), senhaEdt.getText().toString());
-        //LoginCli("Jularia@gmail.com", "123456");
 
-        Intent Home = new Intent(getApplicationContext(),Home.class);
-        startActivity(Home);
-    }
-
-    private void LoginCli() {
-        //pesquisa
-        String email="Jularia@gmail.com";
-        String senha="123456";
-
+    private void LoginCli(String emailcli, String senhaCli) {
         RESTService restService = retrofitLoginCli.create(RESTService.class);
-        Call<Cliente> call= restService.LoginCliente(email, senha);
+        Call<Cliente> call= restService.LoginCliente(emailcli, senhaCli);
 
         //executa e mostra a requisisao
         call.enqueue(new Callback<Cliente>() {
@@ -107,8 +97,22 @@ public class login extends AppCompatActivity {
             public void onResponse(Call<Cliente> call, Response<Cliente> response) {
                 if (response.isSuccessful()) {
                     cli=response.body();
-                    //Log.i("Lista de Jogos", cli.getCPF());
+
+                    //se nã0 existir mensagem de erro
+                    if(cli.getCPF()==null){
+                        Toast.makeText(getApplicationContext(),"Senha ou Email Incorretos", Toast.LENGTH_LONG).show();
+                    }
+                    //se exixtir grava na memoria e abre home
+                    else {
+                        dataCpfCli = cli.getCPF();
+
+                        gravaDataCpf();
+
+                        Intent Home = new Intent(getApplicationContext(),Home.class);
+                        startActivity(Home);
+                    }
                 }
+
             }
 
             @Override
@@ -142,7 +146,6 @@ public class login extends AppCompatActivity {
     private void gravaDataCpf(){
         try {
             FileOutputStream fos = openFileOutput(fileCodUser, Context.MODE_PRIVATE);
-            String dataCpfCli = "333.333.333-33";
             //trnforma em byter e grava
             fos.write(dataCpfCli.getBytes());
             fos.flush();
