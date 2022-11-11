@@ -33,7 +33,7 @@ public class ItemCarrinho {
     @Expose
     public String ImgCapa;
 
-    public ItemCarrinho(int codProd, int qtnProd, String cpf) {
+    public ItemCarrinho( int qtnProd, int codProd, String cpf) {
 
     }
 

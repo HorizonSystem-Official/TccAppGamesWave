@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +16,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,6 +28,7 @@ public class DetelhesProd extends AppCompatActivity {
 
     String LinkApi;
     String cpf;
+    int codProd;
 
     private Retrofit retrofitProd, retrofitComent,retrofitAddItem;
 
@@ -39,12 +37,8 @@ public class DetelhesProd extends AppCompatActivity {
 
     RecyclerView recyclerView;
     AdapterComentariosRecycler adapter;
-    ImageView imgProd;
-    TextView textNomeProd;
-    TextView textCat;
-    TextView textDateLanc;
-    TextView textDesc;
-    TextView textPreco;
+    ImageView imgProd, ImgClasInd;
+    TextView textNomeProd, textCat, textFaixa, textDateLanc, textDesc, textPreco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +48,17 @@ public class DetelhesProd extends AppCompatActivity {
         readDataLinkApi();
         readDataCpf();
 
+         Intent intent = getIntent();
+         codProd = intent.getIntExtra("codProduto",0);
+
          imgProd = (ImageView) findViewById(R.id.imgviewProd);
          textNomeProd =(TextView) findViewById(R.id.textViewNomeProduto);
          textCat =(TextView) findViewById(R.id.textViewCat);
+         ImgClasInd =(ImageView) findViewById(R.id.ImgClasInd);
          textDateLanc =(TextView) findViewById(R.id.textViewDateLanc);
          textDesc =(TextView) findViewById(R.id.textViewDesc);
          textPreco =(TextView) findViewById(R.id.textViewPreco);
+
 
         //inicia o recyclerView
         recyclerView=(RecyclerView)findViewById(R.id.recyclerViewComentario);
@@ -107,14 +106,12 @@ public class DetelhesProd extends AppCompatActivity {
         btnAddCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddItemCar(prod.CodProd, 1,cpf);
+                AddItemCar();
             }
         });
     }
 
     private void MostraUmProd() {
-        Intent intent = getIntent();
-        int codProd = intent.getIntExtra("codProduto",0);
 
         //pesquisa
         RESTService restService = retrofitProd.create(RESTService.class);
@@ -133,9 +130,43 @@ public class DetelhesProd extends AppCompatActivity {
                     Picasso.get().load(prod.getImgCapa()).into(imgProd);
                     textNomeProd.setText(prod.getProdNome());
                     textCat.setText(prod.getProdTipo());
+
+                    switch (prod.getProdFaixaEtaria()){
+                        case "L":
+                            ImgClasInd.setImageResource(R.drawable.classind_l);
+                            break;
+
+                        case "+10":
+                            ImgClasInd.setImageResource(R.drawable.classind_10);
+                            break;
+
+                        case "+14":
+                            ImgClasInd.setImageResource(R.drawable.classind_14);
+                            break;
+
+                        case "+16":
+                            ImgClasInd.setImageResource(R.drawable.classind_16);
+                            break;
+
+                        case "+18":
+                            ImgClasInd.setImageResource(R.drawable.classind_18);
+                            break;
+
+                        default:
+                            ImgClasInd.setImageResource(R.drawable.classind_14);
+                    }
+
+
                     textDateLanc.setText(prod.getProdAnoLanc());
                     textDesc.setText(prod.getProdDesc());
-                    textPreco.setText("R$: "+String.valueOf(prod.getProdValor()));
+
+                    String precoProd=prod.getProdValor().toString();
+                    String penultimaChar= String.valueOf(precoProd.charAt(precoProd.length() - 2));
+                    if(penultimaChar.equals(".")){
+                        textPreco.setText("R$: "+precoProd+"0");
+                    }
+                    else
+                    textPreco.setText("R$: "+precoProd);
                 }
             }
 
@@ -147,9 +178,6 @@ public class DetelhesProd extends AppCompatActivity {
     }
 
     private void MostraComentarios() {
-        Intent intent = getIntent();
-        int codProd = intent.getIntExtra("codProduto",2);
-
         //pesquisa
         RESTService restService = retrofitComent.create(RESTService.class);
         Call<List<Comentario>> call= restService.ListComentarios(codProd);
@@ -170,26 +198,27 @@ public class DetelhesProd extends AppCompatActivity {
         });
     }
 
-    private  void AddItemCar(int codProd, int QtnProd, String Cpf){
+    private void AddItemCar(){
 
         RESTService restService= retrofitAddItem.create(RESTService.class);
-        ItemCarrinho item=new ItemCarrinho(codProd,QtnProd, Cpf);
-        Call<ItemCarrinho> call= restService.AddItensCarrinho(item);
-        call.enqueue(new Callback<ItemCarrinho>() {
+        //ItemCarrinho item=new ItemCarrinho(codProd, 1, cpf);
+        Call<Void> call= restService.AddItensCarrinho(1, codProd, cpf);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<ItemCarrinho> call, Response<ItemCarrinho> response) {
-                ItemCarrinho itemApi=response.body();
-                Log.i("Items do item:", String.valueOf(prod.CodProd));
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                //ItemCarrinho itemApi=response.body();
+
+                Log.i("Deu certo:", String.valueOf(response.code()));
 
                 //abre tela de lista de carrinho
-                Intent TelaHome = new Intent(getApplicationContext(), Home.class);
+               Intent TelaHome = new Intent(getApplicationContext(), Home.class);
                 int codFragment=1;
                 TelaHome.putExtra("codFragment",codFragment);
                 startActivity(TelaHome);
             }
 
             @Override
-            public void onFailure(Call<ItemCarrinho> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.i("Ocorreu um erro ao tentar comprar. Erro:", t.getMessage());
             }
         });

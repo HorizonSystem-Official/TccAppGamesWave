@@ -82,23 +82,26 @@
         app:layout_constraintStart_toEndOf="@+id/textViewLanAux"
         app:layout_constraintTop_toBottomOf="@+id/textViewCat" />
 
-    <TextView
-        android:id="@+id/textViewFaixa"
-        style="@style/TxtPadraoTxtClaro"
+    <ImageView
+        android:id="@+id/ImgClasInd"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
-        android:text="14"
+        android:src="@drawable/classind_l"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLanAux" />
 
     <TextView
         android:id="@+id/textViewDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         style="@style/TxtPadraoTxtClaro"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
+        android:layout_margin="20dp"
         android:text="Desc"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFaixa" />
+        app:layout_constraintTop_toBottomOf="@+id/ImgClasInd" />
 
     <TextView
         android:id="@+id/textViewPreco"
@@ -139,9 +142,7 @@
         style="@style/Theme.MaterialComponents.DayNight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
+        android:layout_margin="30dp"
         android:background="@color/BaseRoxo"
         android:divider="@color/Cinza"
         android:paddingTop="20dp"

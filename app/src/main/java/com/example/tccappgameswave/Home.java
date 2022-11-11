@@ -71,6 +71,11 @@ public class Home extends AppCompatActivity implements
                         new Lista_Compras_Fragment()).commit();
                 break;
 
+            case R.id.navConta:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new UserFragment()).commit();
+                break;
+
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

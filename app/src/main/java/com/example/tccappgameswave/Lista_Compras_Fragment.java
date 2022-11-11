@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,12 +27,15 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
 
     private Retrofit retrofitItensCarrinho;
 
+    Carrinho carrinho;
     List<ItemCarrinho> ItemCarrinhoList;
     AdapterListItensRecycler adapter;
     public RecyclerView recyclerItemCarrinho;
 
     String sCpf;
     String LinkApi;
+
+    TextView txtViewTotal;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,8 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
 
         //lista os itens
         MostraItemCarrinho();
+        MostraTotalCarrinho();
+
     }
 
     @Override
@@ -55,6 +61,8 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_lista__compras_, container, false);
+
+        txtViewTotal=(TextView)view.findViewById(R.id.textViewTotal);
 
         //inicia o recyclerView
         recyclerItemCarrinho=(RecyclerView)view.findViewById(R.id.ListItensCarrinho);
@@ -90,6 +98,33 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
 
             @Override
             public void onFailure(Call<List<ItemCarrinho>> call, Throwable t) {
+                Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
+            }
+        });
+    }
+
+    private void MostraTotalCarrinho() {
+        //pesquisa
+        RESTService restService = retrofitItensCarrinho.create(RESTService.class);
+        Call<Carrinho> call= restService.valorTotalCarrrinho(sCpf);
+        call.enqueue(new Callback<Carrinho>() {
+            @Override
+            public void onResponse(Call<Carrinho> call, Response<Carrinho> response) {
+                if (response.isSuccessful()) {
+                    carrinho=response.body();
+
+                    String carrinhoTotal=String.valueOf(carrinho.getValorTotal());
+                    String penultimaChar= String.valueOf(carrinhoTotal.charAt(carrinhoTotal.length() - 2));
+                    if(penultimaChar.equals(".")){
+                        txtViewTotal.setText("R$: "+carrinhoTotal+"0");
+                    }
+                    else
+                        txtViewTotal.setText("R$: "+carrinhoTotal);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Carrinho> call, Throwable t) {
                 Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
             }
         });

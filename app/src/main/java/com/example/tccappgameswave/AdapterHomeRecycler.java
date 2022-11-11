@@ -5,20 +5,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.picasso.transformations.CropSquareTransformation;
+
 
 public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycler.ProdutoViewHolder> {
 
@@ -52,18 +51,25 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
         Picasso.get()
                 .load(produtoList.get(position).getImgCapa())
                 .placeholder(R.mipmap.ic_launcher_round)
+                .transform(new CropSquareTransformation())
                 .error(R.mipmap.ic_launcher_round)
                 .into(holder.imgviewProd);
 
         String prodNome =produtoList.get(position).getProdNome();
 
-        if(prodNome.length()>14){
-            holder.txtViewProdNome.setText(prodNome.substring(0, 11)+"...");
+        if(prodNome.length()>12){
+            holder.txtViewProdNome.setText(prodNome.substring(0, 9)+"...");
         }else {
             holder.txtViewProdNome.setText(prodNome);
         }
 
-        holder.TxtViewProdPreco.setText("R$: "+produtoList.get(position).getProdValor().toString());
+        String precoProd=produtoList.get(position).getProdValor().toString();
+        String penultimaChar= String.valueOf(precoProd.charAt(precoProd.length() - 2));
+        if(penultimaChar.equals(".")){
+            holder.TxtViewProdPreco.setText("R$: "+precoProd+"0");
+        }
+        else
+        holder.TxtViewProdPreco.setText("R$: "+precoProd);
     }
 
     @Override

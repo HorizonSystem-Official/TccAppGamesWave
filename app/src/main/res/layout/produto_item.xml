@@ -14,26 +14,18 @@
         android:background="@color/BaseRoxo"
         android:padding="12dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardProdCat"
-            android:layout_width="100dp"
+        <ImageView
+            android:id="@+id/imgviewProd"
+            android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_centerHorizontal="true">
-
-            <ImageView
-                android:id="@+id/imgviewProd"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@mipmap/ic_launcher_round" />
-
-        </androidx.cardview.widget.CardView>
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@mipmap/ic_launcher_round" />
 
         <TextView
             android:id="@+id/txtViewProdNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cardProdCat"
+            android:layout_below="@id/imgviewProd"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
             android:gravity="start"

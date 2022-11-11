@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,7 +38,6 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
      AdapterHomeRecycler adapterTiro, adapterTerror, adapterRPG;
      AdapterHomeRecycler adapter;
      public  RecyclerView recyclerViewTiro, recyclerViewTerror, recyclerViewRPG;
-     public  ImageView banner;
 
     String LinkApi;
 
@@ -90,11 +91,11 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         recyclerViewTerror.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewRPG.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        adapterRPG = new AdapterHomeRecycler(getContext(), produtoListRPG, this);
-        adapterTerror = new AdapterHomeRecycler(getContext(), produtoListTerror, this);
-        adapter = new AdapterHomeRecycler(getContext(), produtoList, this);
+        adapterRPG = new AdapterHomeRecycler(getContext(), produtoList, this);
+        adapterTerror = new AdapterHomeRecycler(getContext(), produtoList, this);
+        adapterTiro = new AdapterHomeRecycler(getContext(), produtoList, this);
 
-        recyclerViewTiro.setAdapter(adapter);
+        recyclerViewTiro.setAdapter(adapterTiro);
         recyclerViewTerror.setAdapter(adapterTerror);
         recyclerViewRPG.setAdapter(adapterRPG);
 
@@ -114,7 +115,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
                     produtoList = response.body();
-                    adapter.setMovieList(produtoList);
+                    adapterTiro.setMovieList(produtoList);
                 }
             }
 
@@ -137,8 +138,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
-                    produtoListRPG = response.body();
-                    adapterRPG.setMovieList(produtoListRPG);
+                    produtoList = response.body();
+                    adapterRPG.setMovieList(produtoList);
                 }
             }
 
@@ -161,8 +162,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
-                    produtoListTerror = response.body();
-                    adapterTerror.setMovieList(produtoListTerror);
+                    produtoList = response.body();
+                    adapterTerror.setMovieList(produtoList);
                 }
             }
 
@@ -182,6 +183,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
     //abre os detalhes do produto
     @Override
     public void onItemClick(int position) {
+
 
         int codProduto=produtoList.get(position).getCodProd();
 
@@ -203,6 +205,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         AbreProd.putExtra("codProduto",codProduto);
         startActivity(AbreProd);
     }
+
 
     //ler Link Da api da memoria
     private void readDataLinkApi() {

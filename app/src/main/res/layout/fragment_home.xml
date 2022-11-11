@@ -38,7 +38,7 @@
         <TextView
             android:id="@+id/txtViewTiro"
             style="@style/TxtPadraoTxtClaro"
-            android:text="@string/TxtTiro"
+            android:text="@string/TxtRPG"
             android:textStyle="bold"
             android:layout_marginStart="21dp"
             android:layout_marginBottom="25dp"
@@ -46,7 +46,7 @@
             app:layout_constraintTop_toTopOf="@id/line_1" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_ProdCatTiro"
+            android:id="@+id/recyclerview_ProdCatRPG"
             android:layout_width="wrap_content"
             android:layout_height="280dp"
             android:orientation="horizontal"
@@ -63,7 +63,7 @@
             android:layout_margin="17dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerview_ProdCatTiro" />
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_ProdCatRPG" />
 
         <TextView
             android:id="@+id/txtViewTerror"
@@ -99,12 +99,12 @@
             style="@style/TxtPadraoTxtClaro"
             android:layout_marginStart="21dp"
             android:textStyle="bold"
-            android:text="@string/TxtRPG"
+            android:text="@string/TxtTiro"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line_3" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_ProdCatRPG"
+            android:id="@+id/recyclerview_ProdCatTiro"
             android:layout_width="wrap_content"
             android:layout_height="280dp"
             android:orientation="horizontal"
