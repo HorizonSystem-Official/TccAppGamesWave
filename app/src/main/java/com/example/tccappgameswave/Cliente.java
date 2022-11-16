@@ -31,6 +31,16 @@ public class Cliente {
     @Expose
     public String TelCli ;
 
+
+    public Cliente(String vCPF, String VnomeCliente, String VdataNasc, String VemailCli, String VtelCli) {
+        this.CPF = vCPF;
+        this.NomeCliente = VnomeCliente;
+        this.DataNasc = VdataNasc;
+        this.TelCli = VtelCli;
+        this.EmailCli = VemailCli;
+    }
+
+
     public String getCPF() {
         return CPF;
     }

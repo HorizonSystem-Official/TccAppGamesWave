@@ -28,7 +28,7 @@ public class login extends AppCompatActivity {
 
     private String fileCodUser = "CodUser.txt";
     String LinkApi;
-    private  Retrofit retrofitLoginCli;
+    Retrofit retrofitLoginCli;
     EditText emailEdt,senhaEdt;
     Cliente cli;
     String dataCpfCli;
@@ -71,6 +71,7 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 //consuta se user existe
                 LoginCli(emailEdt.getText().toString(), senhaEdt.getText().toString());
+                TelaHome();
             }
         });
     }
@@ -86,6 +87,13 @@ public class login extends AppCompatActivity {
         startActivity(CriaConta);
     }
 
+    public  void TelaHome(){
+        //LoginCli(emailEdt.getText().toString(), senhaEdt.getText().toString());
+        //LoginCli("Jularia@gmail.com", "123456");
+
+        Intent Home = new Intent(getApplicationContext(),Home.class);
+        startActivity(Home);
+    }
 
     private void LoginCli(String emailcli, String senhaCli) {
         RESTService restService = retrofitLoginCli.create(RESTService.class);
@@ -105,7 +113,7 @@ public class login extends AppCompatActivity {
                     //se exixtir grava na memoria e abre home
                     else {
                         dataCpfCli = cli.getCPF();
-
+                        Log.i("cpf",cli.getCPF());
                         gravaDataCpf();
 
                         Intent Home = new Intent(getApplicationContext(),Home.class);

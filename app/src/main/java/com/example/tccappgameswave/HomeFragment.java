@@ -116,6 +116,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                 if (response.isSuccessful()) {
                     produtoList = response.body();
                     adapterTiro.setMovieList(produtoList);
+                    Log.i("jOGOS DE TIRO", String.valueOf(adapterTiro));
                 }
             }
 
