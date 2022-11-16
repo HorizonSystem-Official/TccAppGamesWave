@@ -38,7 +38,7 @@ public class DetelhesProd extends AppCompatActivity {
     RecyclerView recyclerView;
     AdapterComentariosRecycler adapter;
     ImageView imgProd, ImgClasInd;
-    TextView textNomeProd, textCat, textFaixa, textDateLanc, textDesc, textPreco;
+    TextView textNomeProd, textCat, textDateLanc, textDesc, textPreco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +106,7 @@ public class DetelhesProd extends AppCompatActivity {
         btnAddCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddItemCar();
+                AddItemCar(codProd,cpf);
             }
         });
     }
@@ -124,7 +124,6 @@ public class DetelhesProd extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                     prod=response.body();
-                    //Log.i("Lista de Jogos", String.valueOf(prod));
 
                     //mostra dados na tela
                     Picasso.get().load(prod.getImgCapa()).into(imgProd);
@@ -198,14 +197,17 @@ public class DetelhesProd extends AppCompatActivity {
         });
     }
 
-    private void AddItemCar(){
+    private void AddItemCar(int vcodProd, String vcpf){
 
         RESTService restService= retrofitAddItem.create(RESTService.class);
-        //ItemCarrinho item=new ItemCarrinho(codProd, 1, cpf);
-        Call<Void> call= restService.AddItensCarrinho(1, codProd, cpf);
-        call.enqueue(new Callback<Void>() {
+        Log.i("CodProd", String.valueOf(vcodProd));
+        Log.i("Cpf", vcpf);
+        ItemCarrinho item=new ItemCarrinho(1, vcodProd, vcpf);
+
+        Call<ItemCarrinho> call= restService.AddItensCarrinho(item);
+        call.enqueue(new Callback<ItemCarrinho>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<ItemCarrinho> call, Response<ItemCarrinho> response) {
                 //ItemCarrinho itemApi=response.body();
 
                 Log.i("Deu certo:", String.valueOf(response.code()));
@@ -218,7 +220,7 @@ public class DetelhesProd extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<ItemCarrinho> call, Throwable t) {
                 Log.i("Ocorreu um erro ao tentar comprar. Erro:", t.getMessage());
             }
         });

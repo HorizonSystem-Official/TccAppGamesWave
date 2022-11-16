@@ -112,6 +112,9 @@ public class login extends AppCompatActivity {
                         startActivity(Home);
                     }
                 }
+                else{
+                    Toast.makeText(getApplicationContext(),"Varifique sua conexão", Toast.LENGTH_LONG).show();
+                }
 
             }
 

@@ -23,7 +23,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInterface{
+public class Lista_Compras_Fragment extends Fragment {
 
     private Retrofit retrofitItensCarrinho;
 
@@ -67,7 +67,7 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
         //inicia o recyclerView
         recyclerItemCarrinho=(RecyclerView)view.findViewById(R.id.ListItensCarrinho);
         recyclerItemCarrinho.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        adapter = new AdapterListItensRecycler(getContext(), ItemCarrinhoList, this) {
+        adapter = new AdapterListItensRecycler(getContext(), ItemCarrinhoList) {
             @Override
             public void onItemClick(int position) {
                 Log.i("Lista de Jogos", String.valueOf(ItemCarrinhoList.get(position).getCodProd()));
@@ -128,11 +128,6 @@ public class Lista_Compras_Fragment extends Fragment implements RecyclerViewInte
                 Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
             }
         });
-    }
-
-    @Override
-    public void onItemClick(int position) {
-        Log.i("Lista de Jogos", String.valueOf(ItemCarrinhoList.get(position).getCodProd()));
     }
 
     //ler Link Da api da memoria

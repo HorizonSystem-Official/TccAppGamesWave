@@ -1,31 +1,44 @@
 package com.example.tccappgameswave;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
-public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<AdapterListItensRecycler.ItemViewHolder> {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-    private final RecyclerViewInterface recyclerViewInterface;
+public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<AdapterListItensRecycler.ItemViewHolder> {
 
     Context context;
     List<ItemCarrinho> ItemCarrinhoList;
 
+    private Retrofit retrofitItem;
+    String sCpf;
+    String LinkApi;
 
-    protected AdapterListItensRecycler(Context context, List<ItemCarrinho> itemCarrinhoList, RecyclerViewInterface recyclerViewInterface) {
+
+    protected AdapterListItensRecycler(Context context, List<ItemCarrinho> itemCarrinhoList) {
         this.context=context;
         this.ItemCarrinhoList=itemCarrinhoList;
-        this.recyclerViewInterface=recyclerViewInterface;
     }
 
     public void setMovieList(List<ItemCarrinho> itemCarrinhoList) {
@@ -37,7 +50,7 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
     @Override
     public AdapterListItensRecycler.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_carrinho,parent,false);
-        return new ItemViewHolder(view,recyclerViewInterface);
+        return new ItemViewHolder(view);
     }
 
     @Override
@@ -52,6 +65,32 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
         holder.textNomeProdItem.setText(ItemCarrinhoList.get(position).getProdNome());
         holder.textQtn.setText("Quantidade: "+ItemCarrinhoList.get(position).getQtnProd());
         holder.textTotal.setText(ItemCarrinhoList.get(position).getValorTotal().toString());
+
+        //onclick abre produto
+        int idProd= ItemCarrinhoList.get(position).getCodProd();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Id prod:", String.valueOf(idProd));
+
+                Intent AbreProd = new Intent(context, DetelhesProd.class);
+                AbreProd.putExtra("codProduto",idProd);
+                context.startActivity(AbreProd);
+            }
+        });
+
+        //onclick abre produto
+        holder.BtnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                readDataCpf();
+                Log.i("Remove", String.valueOf(idProd));
+                removeItem(idProd, sCpf);
+
+                Intent AbreProd = new Intent(context, Home.class);
+                context.startActivity(AbreProd);
+            }
+        });
     }
 
     @Override
@@ -68,28 +107,82 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
         TextView textNomeProdItem;
         TextView textQtn;
         TextView textTotal;
+        ImageButton BtnRemove;
 
-        public ItemViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
+        public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgProdItem = itemView.findViewById(R.id.imageViewProdItem);
             textNomeProdItem = itemView.findViewById(R.id.textViewNomeProdItem);
             textQtn = itemView.findViewById(R.id.textViewQtn);
             textTotal = itemView.findViewById(R.id.textViewTotal);
+            BtnRemove = itemView.findViewById(R.id.imageViewProdDelete);
+        }
+    }
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(recyclerViewInterface!=null){
-                        int pos=getAdapterPosition();
+    private void removeItem(int codProd, String cpf) {
+        readDataLinkApi();
+        //mostra prod
+        retrofitItem = new Retrofit.Builder()
+                .baseUrl(LinkApi+"Carrinho/")                                       //endereço do webservice
+                .addConverterFactory(GsonConverterFactory.create()) //conversor
+                .build();
 
-                        if(pos!=RecyclerView.NO_POSITION){
-                            recyclerViewInterface.onItemClick(pos);
-                        }
-                    }
-
+        //pesquisa
+        RESTService restService = retrofitItem.create(RESTService.class);
+        Call<Void> call= restService.RemoveItensCarrinho(codProd, cpf);
+        //executa e mostra a requisisao
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context,"Foi apagou", Toast.LENGTH_LONG).show();
                 }
-            });
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
+            }
+        });
+    }
+
+    //ler Link Da api da memoria
+    private void readDataLinkApi() {
+        try {
+            FileInputStream fin = context.openFileInput("LinkApi.txt");
+            int a;
+            //constroi a string letra por letra
+            StringBuilder temp = new StringBuilder();
+            while ((a = fin.read()) != -1) {
+                temp.append((char)a);
+            }
+
+            LinkApi=temp.toString();
+            fin.close();//fecha busca
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //ler cpf da memoria
+    private void readDataCpf() {
+        try {
+            FileInputStream fin = context.openFileInput("CodUser.txt");
+            int a;
+            //constroi a string letra por letra
+            StringBuilder temp = new StringBuilder();
+            while ((a = fin.read()) != -1)
+            {
+                temp.append((char)a);
+            }
+
+            sCpf=temp.toString();
+            fin.close();//fecha busca
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

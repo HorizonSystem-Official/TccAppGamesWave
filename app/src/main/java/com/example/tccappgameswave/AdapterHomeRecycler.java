@@ -1,6 +1,7 @@
 package com.example.tccappgameswave;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
@@ -21,15 +21,13 @@ import jp.wasabeef.picasso.transformations.CropSquareTransformation;
 
 public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycler.ProdutoViewHolder> {
 
-    private final RecyclerViewInterface recyclerViewInterface;
 
     Context context;
     List<Produto> produtoList;
 
-    public AdapterHomeRecycler(Context context, List<Produto> listProd, RecyclerViewInterface recyclerViewInterface){
+    public AdapterHomeRecycler(Context context, List<Produto> listProd){
         this.context=context;
         this.produtoList=listProd;
-        this.recyclerViewInterface=recyclerViewInterface;
     }
 
     public void setMovieList(List<Produto> listProd) {
@@ -42,7 +40,7 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
     //define o layout usadado
     public AdapterHomeRecycler.ProdutoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.produto_item,parent,false);
-        return new ProdutoViewHolder(view,recyclerViewInterface);
+        return new ProdutoViewHolder(view);
     }
 
     @Override
@@ -69,7 +67,20 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
             holder.TxtViewProdPreco.setText("R$: "+precoProd+"0");
         }
         else
-        holder.TxtViewProdPreco.setText("R$: "+precoProd);
+            holder.TxtViewProdPreco.setText("R$: "+precoProd);
+
+        //onclick abre produto
+        int idProd= produtoList.get(position).getCodProd();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Id prod:", String.valueOf(idProd));
+
+                Intent AbreProd = new Intent(context, DetelhesProd.class);
+                AbreProd.putExtra("codProduto",idProd);
+                context.startActivity(AbreProd);
+            }
+        });
     }
 
     @Override
@@ -79,30 +90,16 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
 
     //define os campo com o layout
     public class ProdutoViewHolder extends RecyclerView.ViewHolder {
-         ImageView imgviewProd;
-         TextView txtViewProdNome;
-         TextView TxtViewProdPreco;
+        ImageView imgviewProd;
+        TextView txtViewProdNome;
+        TextView TxtViewProdPreco;
 
-        public ProdutoViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
+        public ProdutoViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgviewProd = itemView.findViewById(R.id.imgviewProd);
             txtViewProdNome = itemView.findViewById(R.id.txtViewProdNome);
             TxtViewProdPreco = itemView.findViewById(R.id.TxtViewProdPreco);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                   if(recyclerViewInterface!=null){
-                       int pos=getAdapterPosition();
-
-                       if(pos!=RecyclerView.NO_POSITION){
-                           recyclerViewInterface.onItemClick(pos);
-                       }
-                   }
-
-                }
-            });
         }
     }
 }

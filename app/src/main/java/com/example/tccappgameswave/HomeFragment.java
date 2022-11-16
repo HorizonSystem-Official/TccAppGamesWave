@@ -28,16 +28,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HomeFragment extends Fragment implements RecyclerViewInterface{
+public class HomeFragment extends Fragment{
 
     private Retrofit retrofitHomeProd;
 
-     List<Produto> produtoListTiro,produtoListTerror,produtoListRPG;
-     List<Produto> produtoList;
+    List<Produto> produtoList;
 
-     AdapterHomeRecycler adapterTiro, adapterTerror, adapterRPG;
-     AdapterHomeRecycler adapter;
-     public  RecyclerView recyclerViewTiro, recyclerViewTerror, recyclerViewRPG;
+    AdapterHomeRecycler adapterTiro, adapterTerror, adapterRPG;
+    public  RecyclerView recyclerViewTiro, recyclerViewTerror, recyclerViewRPG;
 
     String LinkApi;
 
@@ -46,9 +44,6 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         super.onCreate(savedInstanceState);
         readDataLinkApi();
 
-        produtoListTiro = new ArrayList<>();
-        produtoListTerror = new ArrayList<>();
-        produtoListRPG = new ArrayList<>();
         produtoList = new ArrayList<>();
 
         retrofitHomeProd = new Retrofit.Builder()
@@ -91,9 +86,9 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         recyclerViewTerror.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewRPG.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        adapterRPG = new AdapterHomeRecycler(getContext(), produtoList, this);
-        adapterTerror = new AdapterHomeRecycler(getContext(), produtoList, this);
-        adapterTiro = new AdapterHomeRecycler(getContext(), produtoList, this);
+        adapterRPG = new AdapterHomeRecycler(getContext(), produtoList);
+        adapterTerror = new AdapterHomeRecycler(getContext(), produtoList);
+        adapterTiro = new AdapterHomeRecycler(getContext(), produtoList);
 
         recyclerViewTiro.setAdapter(adapterTiro);
         recyclerViewTerror.setAdapter(adapterTerror);
@@ -178,32 +173,6 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
         Intent DetelhesProd = new Intent(getActivity(), DetelhesProd.class);
         DetelhesProd.putExtra("codProduto",3);
         startActivity(DetelhesProd);
-    }
-
-    //abre os detalhes do produto
-    @Override
-    public void onItemClick(int position) {
-
-
-        int codProduto=produtoList.get(position).getCodProd();
-
-        /*if(produtoListTiro.get(position).getCodProd()==null){
-            Log.i("cod prod que abre:", String.valueOf(produtoListTiro.get(position).getCodProd()));
-        }
-        else if(produtoListTerror.get(position).getCodProd()==null){
-            Log.i("cod prod que abre:", String.valueOf(produtoListTerror.get(position).getCodProd()));
-        }
-
-        else if(produtoListRPG.get(position).getCodProd()==null){
-            Log.i("cod prod que abre:", String.valueOf(produtoListRPG.get(position).getCodProd()));
-        }
-        else {
-            Log.i("cod prod que abre:","nada");
-        }*/
-
-        Intent AbreProd = new Intent(getActivity(), DetelhesProd.class);
-        AbreProd.putExtra("codProduto",codProduto);
-        startActivity(AbreProd);
     }
 
 

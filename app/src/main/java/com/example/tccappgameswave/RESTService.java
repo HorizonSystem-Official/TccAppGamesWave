@@ -4,8 +4,8 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -34,14 +34,17 @@ public interface RESTService {
     //*********************//
 
     //add item ao carrinho
-    @FormUrlEncoded
     @POST("addItemCarrinho")
-    //Call<ItemCarrinho> AddItensCarrinho(@Body ItemCarrinho itemCarrinho);
-    Call<Void> AddItensCarrinho(@Field("QtnProd")int QtnProd, @Field("CodProd") int CodProd,@Field("Cpf") String Cpf);
+    Call<ItemCarrinho> AddItensCarrinho(@Body ItemCarrinho itemCarrinho);
+    //Call<ItemCarrinho> AddItensCarrinho(@Field("QtnProd")int QtnProd, @Field("CodProd") int CodProd, @Field("Cpf") String Cpf);
 
-    //carrinho
+    //mostra itens do carrinho
     @GET("ItensCarrinho?")
     Call<List<ItemCarrinho>> ItensCarrinho(@Query("cpf") String cpf);
+
+    //Remove item
+    @DELETE("removeItem?")
+    Call<Void> RemoveItensCarrinho(@Query("codProd") int codProd, @Query("cpf") String cpf);
 
 
     //*********************//
