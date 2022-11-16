@@ -3,14 +3,14 @@ package com.example.tccappgameswave;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import com.example.tccappgameswave.Models.Cliente;
+
 
 public class BancoDeDados extends SQLiteOpenHelper {
+
 
     //vars Tb Cliente
     public static final String Tabela_Cliente = "TbCliente";

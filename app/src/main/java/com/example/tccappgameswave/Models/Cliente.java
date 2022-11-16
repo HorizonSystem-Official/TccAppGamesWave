@@ -1,4 +1,4 @@
-package com.example.tccappgameswave;
+package com.example.tccappgameswave.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

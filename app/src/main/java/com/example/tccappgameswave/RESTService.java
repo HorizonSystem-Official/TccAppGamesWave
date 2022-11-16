@@ -1,5 +1,11 @@
 package com.example.tccappgameswave;
 
+import com.example.tccappgameswave.Models.Carrinho;
+import com.example.tccappgameswave.Models.Cliente;
+import com.example.tccappgameswave.Models.Comentario;
+import com.example.tccappgameswave.Models.ItemCarrinho;
+import com.example.tccappgameswave.Models.Produto;
+
 import java.util.List;
 
 import retrofit2.Call;

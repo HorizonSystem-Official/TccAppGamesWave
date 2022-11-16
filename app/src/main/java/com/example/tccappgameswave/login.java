@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tccappgameswave.Models.Cliente;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;
