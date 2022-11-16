@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private void gravaDataLinkApi(){
         try {
             FileOutputStream fos = openFileOutput(fileLinkApi, Context.MODE_PRIVATE);
-            String dataLinkApi = "https://firstgreenlamp68.conveyor.cloud/";
+            String dataLinkApi = "https://lostgreycard28.conveyor.cloud/";
             //trnforma em byter e grava
             fos.write(dataLinkApi.getBytes());
             fos.flush();

@@ -40,7 +40,7 @@ public class DetelhesProd extends AppCompatActivity {
     RecyclerView recyclerView;
     AdapterComentariosRecycler adapter;
     ImageView imgProd, ImgClasInd;
-    TextView textNomeProd, textCat, textFaixa, textDateLanc, textDesc, textPreco;
+    TextView textNomeProd, textCat, textDateLanc, textDesc, textPreco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +108,7 @@ public class DetelhesProd extends AppCompatActivity {
         btnAddCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddItemCar();
+                AddItemCar(prod.getCodProd());
             }
         });
     }
@@ -200,7 +200,7 @@ public class DetelhesProd extends AppCompatActivity {
         });
     }
 
-    private void AddItemCar(){
+    private void AddItemCar(int codProd){
 
         RESTService restService= retrofitAddItem.create(RESTService.class);
         //ItemCarrinho item=new ItemCarrinho(codProd, 1, cpf);

@@ -56,9 +56,9 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface{
                 .build();
 
         //lista os jogos
-        MostraProdsTiro();
         MostraProdsRPG();
         MostraProdsTerror();
+        MostraProdsTiro();
     }
 
     @Override
