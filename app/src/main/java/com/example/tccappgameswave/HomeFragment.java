@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.tccappgameswave.Models.Produto;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;
@@ -52,9 +51,9 @@ public class HomeFragment extends Fragment{
                 .build();
 
         //lista os jogos
-        MostraProdsTiro();
         MostraProdsRPG();
         MostraProdsTerror();
+        MostraProdsTiro();
     }
 
     @Override
@@ -111,6 +110,7 @@ public class HomeFragment extends Fragment{
                 if (response.isSuccessful()) {
                     produtoList = response.body();
                     adapterTiro.setMovieList(produtoList);
+                    Log.i("jOGOS DE TIRO", String.valueOf(adapterTiro));
                 }
             }
 

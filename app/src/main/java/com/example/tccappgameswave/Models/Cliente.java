@@ -1,4 +1,4 @@
-package com.example.tccappgameswave;
+package com.example.tccappgameswave.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -30,6 +30,14 @@ public class Cliente {
     @SerializedName("TelCli")
     @Expose
     public String TelCli ;
+
+    public Cliente(String vCPF, String VnomeCliente, String VdataNasc, String VemailCli, String VtelCli) {
+        this.CPF = vCPF;
+        this.NomeCliente = VnomeCliente;
+        this.DataNasc = VdataNasc;
+        this.TelCli = VtelCli;
+        this.EmailCli = VemailCli;
+    }
 
     public String getCPF() {
         return CPF;

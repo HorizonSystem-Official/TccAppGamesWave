@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.tccappgameswave.Models.Carrinho;
+import com.example.tccappgameswave.Models.ItemCarrinho;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;

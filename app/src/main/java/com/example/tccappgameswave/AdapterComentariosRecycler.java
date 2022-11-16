@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tccappgameswave.Models.Comentario;
+
 import java.util.List;
 
 public class AdapterComentariosRecycler extends  RecyclerView.Adapter<AdapterComentariosRecycler.ComentarioHolder> {

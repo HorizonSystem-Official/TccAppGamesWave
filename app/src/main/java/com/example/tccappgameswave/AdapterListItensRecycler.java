@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tccappgameswave.Models.ItemCarrinho;
+import com.example.tccappgameswave.RecyclerViewInterface;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;
