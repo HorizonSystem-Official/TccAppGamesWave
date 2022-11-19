@@ -59,6 +59,9 @@ public interface RESTService {
     @GET("LoginCliente?")
     Call<Cliente> LoginCliente(@Query("Emailcli") String email, @Query("senhaCli") String senha);
 
+    @GET("DadosCli?")
+    Call<Cliente> DetalhesCliente(@Query("CpfCli") String email);
+
     @POST("addCliente")
     Call<Cliente> addCliente(@Body Cliente cliente);
 }

@@ -38,7 +38,7 @@
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="48dp"
                 android:text="@string/TxtLanc"
                 app:layout_constraintStart_toEndOf="@+id/imageViewProdItem"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:text="Quantidade: 1"
                 app:layout_constraintStart_toEndOf="@+id/imageViewProdItem"
                 app:layout_constraintTop_toBottomOf="@+id/textViewNomeProdItem" />
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/TxtCat"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageViewProdItem"

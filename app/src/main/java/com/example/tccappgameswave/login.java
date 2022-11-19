@@ -13,11 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tccappgameswave.Models.Cliente;
+import com.example.tccappgameswave.Models.Produto;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,10 +31,11 @@ public class login extends AppCompatActivity {
 
     private String fileCodUser = "CodUser.txt";
     String LinkApi;
-    private  Retrofit retrofitLoginCli;
+    private  Retrofit retrofitLoginCli,retrofitDetalhesCli;
     EditText emailEdt,senhaEdt;
     Cliente cli;
     String dataCpfCli;
+    BancoDeDados db=new BancoDeDados(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,12 @@ public class login extends AppCompatActivity {
 
         //faz o login
         retrofitLoginCli= new Retrofit.Builder()
+                .baseUrl(LinkApi+"Cliente/").
+                addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        //faz recebe dados do cli
+        retrofitDetalhesCli= new Retrofit.Builder()
                 .baseUrl(LinkApi+"Cliente/").
                 addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -106,7 +115,10 @@ public class login extends AppCompatActivity {
                     //se exixtir grava na memoria e abre home
                     else {
                         dataCpfCli = cli.getCPF();
+                        //grava na meoria interna
                         gravaDataCpf();
+                        //grava no slqite
+                        MostraCli();
 
                         Intent Home = new Intent(getApplicationContext(),Home.class);
                         startActivity(Home);
@@ -157,5 +169,30 @@ public class login extends AppCompatActivity {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void MostraCli() {
+        //pesquisa
+        RESTService restService = retrofitDetalhesCli.create(RESTService.class);
+        Call<Cliente> call= restService.DetalhesCliente(dataCpfCli);
+        //executa e mostra a requisisao
+        call.enqueue(new Callback<Cliente>() {
+            @Override
+            public void onResponse(Call<Cliente> call, Response<Cliente> response) {
+                if (response.isSuccessful()) {
+                    cli = response.body();
+                    if(db.selecionaCliente(cli.getCPF())==null){
+                        db.addCli(new Cliente(cli.getCPF(), cli.getNomeCliente(), cli.getDataNasc(), cli.getTelCli(), cli.getEmailCli()));
+                        Log.i("Inseriu", "sim");
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cliente> call, Throwable t) {
+                Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
+            }
+        });
     }
 }

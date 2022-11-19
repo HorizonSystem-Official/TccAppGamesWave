@@ -44,24 +44,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgviewProd" />
 
-    <TextView
-        android:id="@+id/textViewCatAux"
-        style="@style/TxtPadraoTxtClaro"
-        android:text="@string/TxtCat"
-        android:textColor="@color/Cinza"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNomeProduto" />
+            <TextView
+                android:id="@+id/textViewPreco"
+                style="@style/TxtPadraoTxtClaro"
+                android:text="R$: 26.99"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_margin="20dp"
+                android:layout_marginStart="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNomeProduto" />
+
+            <Button
+                android:id="@+id/btnAddCarrinho"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="38dp"
+                android:background="@drawable/borda_aredondada"
+                android:backgroundTint="@color/BaseRosa"
+                android:text="@string/TxtAddCarrinho"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPreco" />
+
+            <TextView
+                android:id="@+id/textViewCatAux"
+                style="@style/TxtPadraoTxtClaro"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="45dp"
+                android:text="@string/TxtCat"
+                android:textColor="@color/Cinza"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnAddCarrinho" />
 
     <TextView
         android:id="@+id/textViewCat"
         style="@style/TxtPadraoTxtClaro"
         android:text="Livre"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="45dp"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@+id/textViewCatAux"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNomeProduto" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAddCarrinho" />
 
     <TextView
         android:id="@+id/textViewLanAux"
@@ -103,28 +126,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImgClasInd" />
 
-    <TextView
-        android:id="@+id/textViewPreco"
-        style="@style/TxtPadraoTxtClaro"
-        android:layout_marginTop="32dp"
-        android:text="R$: 26.99"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDesc" />
-
-    <Button
-        android:id="@+id/btnAddCarrinho"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="38dp"
-        android:background="@drawable/borda_aredondada"
-        android:backgroundTint="@color/BaseRosa"
-        android:text="@string/TxtAddCarrinho"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPreco" />
 
     <TextView
         android:id="@+id/textViewComentario"
@@ -135,7 +136,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddCarrinho" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDesc" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewComentario"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/BaseRoxo"
     tools:context=".UserFragment">
 
 
@@ -28,7 +28,7 @@
 
             <TextView
                 android:id="@+id/textViewNome"
-                style="@style/TxtPadraoTxt"
+                style="@style/TxtPadraoTxtClaro"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="54dp"
                 android:text="Seu nome"
@@ -38,10 +38,10 @@
 
             <TextView
                 android:id="@+id/textViewEmail"
-                style="@style/TxtPadraoTxt"
+                style="@style/TxtPadraoTxtClaro"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="14dp"
-                android:textColor="@color/CinzaEscuro"
+                android:textColor="@color/Cinza"
                 android:text="Seu email"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/fotoUser"
@@ -53,6 +53,7 @@
                 android:layout_marginTop="44dp"
                 android:backgroundTint="@color/white"
                 android:text="Meus pedidos"
+                app:backgroundTint="@color/purple_500"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
@@ -62,11 +63,58 @@
                 style="@style/BtnPadraoConta"
                 android:backgroundTint="@color/white"
                 android:text="Alterar Dados"
+                app:backgroundTint="@color/purple_500"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/info_conta" />
 
+            <TextView
+                android:id="@+id/textViewinfos"
+                style="@style/TxtPadraoTxtClaro"
+                android:layout_marginTop="28dp"
+                android:layout_marginStart="14dp"
+                android:text="@string/TxtInfos"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnChengeData" />
 
+            <Button
+                android:id="@+id/button8"
+                style="@style/BtnPadraoConta"
+                android:text="@string/TxtTermosCond"
+                android:layout_marginTop="16dp"
+                app:backgroundTint="@color/purple_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewinfos" />
+
+            <Button
+                android:id="@+id/button6"
+                style="@style/BtnPadraoConta"
+                android:text="@string/TxtSuporte"
+                app:backgroundTint="@color/purple_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button8" />
+
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/borda_aredondada"
+                android:padding="10dp"
+                android:text="@string/TxtSair"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_marginTop="36dp"
+                android:layout_margin="46dp"
+                app:backgroundTint="@color/purple_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button6" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </FrameLayout>

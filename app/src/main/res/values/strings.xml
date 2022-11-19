@@ -16,6 +16,10 @@
     <string name="txtNomeUser">Seu Nome</string>
     <string name="TxtTel">Telefone</string>
     <string name="txtDataNasc">Data de Nascimento </string>
+    <string name="TxtSuporte">Suporte</string>
+    <string name="TxtInfoLegais">Informações Legais</string>
+    <string name="TxtInfos">Informações</string>
+    <string name="TxtTermosCond">Termos de Uso</string>
 
     <!--Categoria -->
     <string name="TxtCat">categoria</string>

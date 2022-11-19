@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private void gravaDataLinkApi(){
         try {
             FileOutputStream fos = openFileOutput(fileLinkApi, Context.MODE_PRIVATE);
-            String dataLinkApi = "https://lastbrassboat91.conveyor.cloud/api/";
+            String dataLinkApi = "https://smallaquahen10.conveyor.cloud/api/";
             //trnforma em byter e grava
             fos.write(dataLinkApi.getBytes());
             fos.flush();

@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tccappgameswave.Models.Comentario;
+import com.example.tccappgameswave.Models.ItemCarrinho;
+import com.example.tccappgameswave.Models.Produto;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;

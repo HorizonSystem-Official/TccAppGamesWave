@@ -43,8 +43,6 @@ public class HomeFragment extends Fragment{
         super.onCreate(savedInstanceState);
         readDataLinkApi();
 
-        produtoList = new ArrayList<>();
-
         retrofitHomeProd = new Retrofit.Builder()
                 .baseUrl(LinkApi+"Produto/")                                       //endere-ço do webservice
                 .addConverterFactory(GsonConverterFactory.create()) //conversor
