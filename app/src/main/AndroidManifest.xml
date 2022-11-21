@@ -17,6 +17,13 @@
         android:theme="@style/Theme.TccAppGamesWave"
         tools:targetApi="31">
         <activity
+            android:name=".Pesquisa"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".DetelhesProd"
             android:exported="false" />
         <activity

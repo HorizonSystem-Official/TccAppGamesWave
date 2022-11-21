@@ -21,6 +21,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -83,10 +85,15 @@ public class DetelhesProd extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+        HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient=new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
         //add item
         retrofitAddItem= new Retrofit.Builder()
                 .baseUrl(LinkApi+"Carrinho/").
                 addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
 
         //lista os jogos
@@ -109,7 +116,7 @@ public class DetelhesProd extends AppCompatActivity {
         btnAddCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddItemCar(codProd,cpf);
+                AddItemCar(InsertProd());
             }
         });
     }
@@ -200,26 +207,31 @@ public class DetelhesProd extends AppCompatActivity {
         });
     }
 
-    private void AddItemCar(int vcodProd, String vcpf){
+    public ItemCarrinho InsertProd(){
+        ItemCarrinho itemCarrinho=new ItemCarrinho();
+        itemCarrinho.setQtnProd(1);
+        itemCarrinho.setCodProd(codProd);
+        itemCarrinho.setCpf(cpf);
+        return itemCarrinho;
+    }
+    private void AddItemCar(ItemCarrinho itemCarrinho){
 
         RESTService restService= retrofitAddItem.create(RESTService.class);
-        Log.i("CodProd", String.valueOf(vcodProd));
-        Log.i("Cpf", vcpf);
-        ItemCarrinho item=new ItemCarrinho(1, vcodProd, vcpf);
-
-        Call<ItemCarrinho> call= restService.AddItensCarrinho(item);
+        Log.i("codigo", String.valueOf(codProd));
+        Call<ItemCarrinho> call= restService.AddItensCarrinho(itemCarrinho);
         call.enqueue(new Callback<ItemCarrinho>() {
             @Override
             public void onResponse(Call<ItemCarrinho> call, Response<ItemCarrinho> response) {
-                //ItemCarrinho itemApi=response.body();
+                if (response.isSuccessful()){
+                    //abre tela de lista de carrinho
+                    Intent TelaHome = new Intent(getApplicationContext(), Home.class);
+                    int codFragment=1;
+                    TelaHome.putExtra("codFragment",codFragment);
+                    startActivity(TelaHome);
 
+                    Log.i("Deu certo:", String.valueOf(response.code()));
+                }
                 Log.i("Deu certo:", String.valueOf(response.code()));
-
-                //abre tela de lista de carrinho
-               Intent TelaHome = new Intent(getApplicationContext(), Home.class);
-                int codFragment=1;
-                TelaHome.putExtra("codFragment",codFragment);
-                startActivity(TelaHome);
             }
 
             @Override

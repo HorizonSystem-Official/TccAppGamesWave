@@ -33,11 +33,6 @@ public class ItemCarrinho {
     @Expose
     public String ImgCapa;
 
-    public ItemCarrinho( int qtnProd, int codProd, String cpf) {
-
-    }
-
-
     public String getProdNome() {
         return ProdNome;
     }

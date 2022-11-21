@@ -7,6 +7,7 @@
     android:background="@drawable/bglogin_roxo"
     tools:context=".cadastroCliente">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,7 +17,6 @@
             android:layout_height="wrap_content"
             android:padding="32dp"
             android:paddingBottom="50dp">
-
 
         <ImageView
             android:id="@+id/imageViewVoltar"
@@ -82,16 +82,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_textNome" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_textEmail"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:inputType="text"
-            android:textColor="@color/CinzaClaro"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_textEmail"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:inputType="textWebEmailAddress"
+                android:textColor="@color/CinzaClaro"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
         <TextView
             android:id="@+id/textViewCPF"
@@ -105,18 +105,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_textEmail" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_textCPF"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:inputType="text"
-            android:textColor="@color/CinzaClaro"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCPF" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_textCPF"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:inputType="text"
+                android:textColor="@color/CinzaClaro"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewCPF" />
 
-        <TextView
+            <TextView
+                android:id="@+id/textViewDataNasc"
+                style="@style/TxtPadraoTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text="@string/txtDataNasc"
+                android:textColor="@color/CinzaClaro"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_textCPF" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_textDataNasc"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:inputType="date"
+                android:textColor="@color/CinzaClaro"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.75"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDataNasc" />
+
+            <TextView
             android:id="@+id/textViewTel"
             style="@style/TxtPadraoTxt"
             android:layout_width="wrap_content"
@@ -126,20 +150,20 @@
             android:textColor="@color/CinzaClaro"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_textCPF" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_textDataNasc" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_textTel"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:inputType="text"
-            android:textColor="@color/CinzaClaro"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTel" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_textTel"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:inputType="number"
+                android:textColor="@color/CinzaClaro"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTel" />
 
-        <TextView
+            <TextView
             android:id="@+id/textViewSenha"
             style="@style/TxtPadraoTxt"
             android:layout_width="wrap_content"
@@ -155,7 +179,7 @@
             android:id="@+id/edit_textSenha"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textColor="@color/CinzaClaro"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -163,7 +187,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewSenha" />
 
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnCadastro"
                 android:layout_width="206dp"
                 android:layout_height="64dp"
                 android:layout_marginTop="40dp"

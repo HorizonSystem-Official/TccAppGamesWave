@@ -20,6 +20,7 @@
     <string name="TxtInfoLegais">Informações Legais</string>
     <string name="TxtInfos">Informações</string>
     <string name="TxtTermosCond">Termos de Uso</string>
+    <string name="TxtPesc">Pesquisar...</string>
 
     <!--Categoria -->
     <string name="TxtCat">categoria</string>

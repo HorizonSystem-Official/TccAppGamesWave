@@ -8,17 +8,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 
 import com.example.tccappgameswave.Models.Produto;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,6 +40,7 @@ public class HomeFragment extends Fragment{
     AdapterHomeRecycler adapterTiro, adapterTerror, adapterRPG;
     public  RecyclerView recyclerViewTiro, recyclerViewTerror, recyclerViewRPG;
 
+    EditText editPesquisa;
     String LinkApi;
 
     @Override
@@ -67,6 +72,27 @@ public class HomeFragment extends Fragment{
                 DetelhesProd();
             }
         });
+
+
+        editPesquisa=(EditText) view.findViewById(R.id.TxtEdtPesquisa);
+        editPesquisa.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int i, KeyEvent keyEvent) {
+                if(keyEvent!=null&&(keyEvent.getKeyCode()==KeyEvent.KEYCODE_ENTER)|| (i== EditorInfo.IME_ACTION_DONE)){
+                    PesqusiaProd();
+                }
+                return false;
+            }
+        });
+
+        ImageView BtnPesquisa=(ImageView) view.findViewById(R.id.imageViewPesquisa);
+        BtnPesquisa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PesqusiaProd();
+            }
+        });
+
 
         Picasso.get()
                 .load("https://www.brickfanatics.com/wp-content/uploads/LEGO-Star-Wars-The-Skywalker-Saga-glitched-title-screen-800x445.jpg")
@@ -171,6 +197,16 @@ public class HomeFragment extends Fragment{
         Intent DetelhesProd = new Intent(getActivity(), DetelhesProd.class);
         DetelhesProd.putExtra("codProduto",3);
         startActivity(DetelhesProd);
+    }
+
+    public  void PesqusiaProd(){
+        String TxtPesquisa=editPesquisa.getText().toString();
+        editPesquisa.setText("");
+
+        //abre a tela pesquisa
+        Intent TelaPesqusia = new Intent(getContext(),Pesquisa.class);
+        TelaPesqusia.putExtra("TxtPesquisa",TxtPesquisa);
+        startActivity(TelaPesqusia);
     }
 
 

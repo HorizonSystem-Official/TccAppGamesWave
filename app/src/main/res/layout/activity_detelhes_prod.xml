@@ -38,7 +38,7 @@
         android:id="@+id/textViewNomeProduto"
         style="@style/TxtPadraoTxtClaro"
         android:layout_marginStart="15dp"
-        android:text="jogo do elmo"
+        android:text=""
         android:layout_marginTop="9dp"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
             <TextView
                 android:id="@+id/textViewPreco"
                 style="@style/TxtPadraoTxtClaro"
-                android:text="R$: 26.99"
+                android:text=""
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_margin="20dp"
@@ -80,7 +80,9 @@
     <TextView
         android:id="@+id/textViewCat"
         style="@style/TxtPadraoTxtClaro"
-        android:text="Livre"
+        android:text=""
+        android:background="@drawable/borda_aredondada"
+        android:backgroundTint="@color/BaseRoxoescuro"
         android:layout_marginTop="45dp"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@+id/textViewCatAux"

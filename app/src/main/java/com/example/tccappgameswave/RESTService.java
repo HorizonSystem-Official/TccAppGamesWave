@@ -27,9 +27,8 @@ public interface RESTService {
     @GET("ProdDetalhado?")
     Call<Produto> MostraProdDetalhes(@Query("idProd") int codProd);
 
-    //valor total carrinho
-    @GET("TotalCarrinho?")
-    Call<Carrinho> valorTotalCarrrinho(@Query("cpf") String cpf);
+    @GET("PesquisaProd?")
+    Call<List<Produto>>  PesquisaProduto(@Query("txtPesquisa") String txtPesquisa);
 
     //comentarios
     @GET("ComentariosProd?")
@@ -47,6 +46,10 @@ public interface RESTService {
     //mostra itens do carrinho
     @GET("ItensCarrinho?")
     Call<List<ItemCarrinho>> ItensCarrinho(@Query("cpf") String cpf);
+
+    //valor total carrinho
+    @GET("TotalCarrinho?")
+    Call<Carrinho> valorTotalCarrrinho(@Query("cpf") String cpf);
 
     //Remove item
     @DELETE("removeItem?")
