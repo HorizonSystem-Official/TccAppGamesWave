@@ -93,12 +93,12 @@ public class cadastroCliente extends AppCompatActivity {
         CliTel=editTel.getText().toString();
         CliSenha=editSenha.getText().toString();
 
-        Cliente item=new Cliente(CliCpf, CliNome, CliNasc, CliSenha, CliEmail, CliTel);
+        Cliente item=new Cliente(CliCpf, CliNome, CliNasc, CliSenha, CliTel, CliEmail);
 
-        Call<Cliente> call= restService.addCliente(item);
-        call.enqueue(new Callback<Cliente>() {
+        Call<Void> call= restService.addCliente(item);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Cliente> call, Response<Cliente> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()){
                     //abre login
                     TelaLogin();
@@ -109,7 +109,7 @@ public class cadastroCliente extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Cliente> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.i("Ocorreu um erro ao tentar comprar. Erro:", t.getMessage());
             }
         });

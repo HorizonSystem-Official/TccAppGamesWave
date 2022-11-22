@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.tccappgameswave.Models.Comentario;
@@ -21,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.CropSquareTransformation;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -136,7 +140,7 @@ public class DetelhesProd extends AppCompatActivity {
                     prod=response.body();
 
                     //mostra dados na tela
-                    Picasso.get().load(prod.getImgCapa()).into(imgProd);
+                    Picasso.get().load(prod.getImgCapa()).transform(new CropSquareTransformation()).into(imgProd);
                     textNomeProd.setText(prod.getProdNome());
                     textCat.setText(prod.getProdTipo());
 
@@ -172,10 +176,10 @@ public class DetelhesProd extends AppCompatActivity {
                     String precoProd=prod.getProdValor().toString();
                     String penultimaChar= String.valueOf(precoProd.charAt(precoProd.length() - 2));
                     if(penultimaChar.equals(".")){
-                        textPreco.setText("R$: "+precoProd+"0");
+                        textPreco.setText("R$"+precoProd+"0");
                     }
                     else
-                    textPreco.setText("R$: "+precoProd);
+                    textPreco.setText("R$"+precoProd);
                 }
             }
 
@@ -218,24 +222,22 @@ public class DetelhesProd extends AppCompatActivity {
 
         RESTService restService= retrofitAddItem.create(RESTService.class);
         Log.i("codigo", String.valueOf(codProd));
-        Call<ItemCarrinho> call= restService.AddItensCarrinho(itemCarrinho);
-        call.enqueue(new Callback<ItemCarrinho>() {
+        Call<Void> call= restService.AddItensCarrinho(itemCarrinho);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<ItemCarrinho> call, Response<ItemCarrinho> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()){
                     //abre tela de lista de carrinho
                     Intent TelaHome = new Intent(getApplicationContext(), Home.class);
                     int codFragment=1;
                     TelaHome.putExtra("codFragment",codFragment);
                     startActivity(TelaHome);
-
-                    Log.i("Deu certo:", String.valueOf(response.code()));
                 }
                 Log.i("Deu certo:", String.valueOf(response.code()));
             }
 
             @Override
-            public void onFailure(Call<ItemCarrinho> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.i("Ocorreu um erro ao tentar comprar. Erro:", t.getMessage());
             }
         });

@@ -28,6 +28,8 @@
     <string name="TxtTiro">Tiro</string>
     <string name="TxtRPG">RPG</string>
     <string name="TxtTerror">Terror</string>
+    <string name="TxtAuxDesc">Descrição</string>
+    <string name="TxtAuxPreco">Preço</string>
 
     <string name="TxtAddCarrinho">Adiconar ao Carrinho</string>
 

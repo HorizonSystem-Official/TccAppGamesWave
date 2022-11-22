@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.CropSquareTransformation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,6 +61,7 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
         Picasso.get()
                 .load(ItemCarrinhoList.get(position).getImgCapa())
                 .placeholder(R.mipmap.ic_launcher_round)
+                .transform(new CropSquareTransformation())
                 .error(R.mipmap.ic_launcher_round)
                 .into(holder.imgProdItem);
 
@@ -72,7 +74,7 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("Id prod:", String.valueOf(idProd));
+                Log.i("Id prod", String.valueOf(idProd));
 
                 Intent AbreProd = new Intent(context, DetelhesProd.class);
                 AbreProd.putExtra("codProduto",idProd);
@@ -85,11 +87,12 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
             @Override
             public void onClick(View view) {
                 readDataCpf();
-                Log.i("Remove", String.valueOf(idProd));
                 removeItem(idProd, sCpf);
 
-                Intent AbreProd = new Intent(context, Home.class);
-                context.startActivity(AbreProd);
+                Intent TelaHome = new Intent(context, Home.class);
+                int codFragment=1;
+                TelaHome.putExtra("codFragment",codFragment);
+                context.startActivity(TelaHome);
             }
         });
     }
@@ -137,7 +140,7 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(context,"Foi apagou", Toast.LENGTH_LONG).show();
+                    Log.i("Apagou", String.valueOf(codProd));
                 }
             }
 

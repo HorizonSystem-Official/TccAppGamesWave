@@ -95,7 +95,6 @@ public class Lista_Compras_Fragment extends Fragment {
                 if (response.isSuccessful()) {
                     ItemCarrinhoList = response.body();
                     adapter.setMovieList(ItemCarrinhoList);
-                    Log.i("Lista de Jogos", String.valueOf(ItemCarrinhoList));
                 }
             }
 

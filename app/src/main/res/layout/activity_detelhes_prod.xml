@@ -13,26 +13,27 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="0dp">
 
-    <ImageView
-        android:id="@+id/imageViewVoltarHome"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp"
-        app:srcCompat="@drawable/seta_voltar" />
 
             <ImageView
                 android:id="@+id/imgviewProd"
-                android:layout_width="400dp"
-                android:layout_height="450dp"
-                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="380dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/logogameswave" />
+
+            <ImageView
+                android:id="@+id/imageViewVoltarHome"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="10dp"
+                app:srcCompat="@drawable/seta_voltar" />
 
     <TextView
         android:id="@+id/textViewNomeProduto"
@@ -58,7 +59,7 @@
             <Button
                 android:id="@+id/btnAddCarrinho"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_margin="38dp"
                 android:background="@drawable/borda_aredondada"
                 android:backgroundTint="@color/BaseRosa"
@@ -81,8 +82,6 @@
         android:id="@+id/textViewCat"
         style="@style/TxtPadraoTxtClaro"
         android:text=""
-        android:background="@drawable/borda_aredondada"
-        android:backgroundTint="@color/BaseRoxoescuro"
         android:layout_marginTop="45dp"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@+id/textViewCatAux"
@@ -109,13 +108,23 @@
 
     <ImageView
         android:id="@+id/ImgClasInd"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/classind_l"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLanAux" />
+
+     <TextView
+         android:id="@+id/textViewDescAux"
+         style="@style/TxtPadraoTxtClaro"
+         android:layout_marginTop="15dp"
+         android:layout_marginStart="15dp"
+         android:text="@string/TxtAuxDesc"
+         android:textColor="@color/Cinza"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/ImgClasInd"/>
 
     <TextView
         android:id="@+id/textViewDesc"
@@ -124,9 +133,9 @@
         style="@style/TxtPadraoTxtClaro"
         android:layout_marginStart="12dp"
         android:layout_margin="20dp"
-        android:text="Desc"
+        android:text="@string/TxtAuxDesc"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ImgClasInd" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescAux" />
 
 
     <TextView

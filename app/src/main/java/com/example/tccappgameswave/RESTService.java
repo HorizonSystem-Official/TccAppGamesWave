@@ -40,8 +40,8 @@ public interface RESTService {
 
     //add item ao carrinho
     @POST("addItemCarrinho")
-    Call<ItemCarrinho> AddItensCarrinho(@Body ItemCarrinho itemCarrinho);
-    //Call<ItemCarrinho> AddItensCarrinho(@Field("QtnProd")int QtnProd, @Field("CodProd") int CodProd, @Field("Cpf") String Cpf);
+   // Call<ItemCarrinho> AddItensCarrinho(@Body ItemCarrinho itemCarrinho);
+    Call<Void> AddItensCarrinho(@Body ItemCarrinho itemCarrinho);
 
     //mostra itens do carrinho
     @GET("ItensCarrinho?")
@@ -66,5 +66,5 @@ public interface RESTService {
     Call<Cliente> DetalhesCliente(@Query("CpfCli") String email);
 
     @POST("addCliente")
-    Call<Cliente> addCliente(@Body Cliente cliente);
+    Call<Void> addCliente(@Body Cliente cliente);
 }

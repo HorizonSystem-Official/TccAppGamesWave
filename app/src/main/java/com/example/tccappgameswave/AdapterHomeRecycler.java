@@ -65,10 +65,10 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
         String precoProd=produtoList.get(position).getProdValor().toString();
         String penultimaChar= String.valueOf(precoProd.charAt(precoProd.length() - 2));
         if(penultimaChar.equals(".")){
-            holder.TxtViewProdPreco.setText("R$: "+precoProd+"0");
+            holder.TxtViewProdPreco.setText("R$ "+precoProd+"0");
         }
         else
-            holder.TxtViewProdPreco.setText("R$: "+precoProd);
+            holder.TxtViewProdPreco.setText("R$ "+precoProd);
 
         //onclick abre produto
         int idProd= produtoList.get(position).getCodProd();

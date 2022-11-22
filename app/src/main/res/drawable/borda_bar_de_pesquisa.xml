@@ -3,5 +3,5 @@
     android:id="@+id/alternativo"
     android:shape="rectangle">
     <solid android:color="#fff"/>
-    <corners android:radius="10dp"/>
+    <corners android:radius="100dp"/>
 </shape>
