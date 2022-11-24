@@ -16,6 +16,7 @@ import com.example.tccappgameswave.Models.Cliente;
 import com.example.tccappgameswave.Models.Produto;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,6 +44,9 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         readDataLinkApi();
+
+        File file= new File("CodUser.txt");
+        file.delete();
 
         emailEdt =(EditText) findViewById(R.id.editUserLogin);
         senhaEdt =(EditText) findViewById(R.id.EditSenhaLogin);

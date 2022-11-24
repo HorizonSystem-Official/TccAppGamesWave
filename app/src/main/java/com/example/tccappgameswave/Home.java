@@ -14,6 +14,8 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.File;
+
 public class Home extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener{
 
@@ -75,6 +77,14 @@ public class Home extends AppCompatActivity implements
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new UserFragment()).commit();
                 break;
+
+            case R.id.navsair:
+                Intent TelaLogin = new Intent(getApplicationContext(), login.class);
+                startActivity(TelaLogin);
+                File file= new File("CodUser.txt");
+                file.delete();
+                break;
+
 
         }
         drawer.closeDrawer(GravityCompat.START);

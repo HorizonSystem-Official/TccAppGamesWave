@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EditSenhaLogin"
         android:layout_width="match_parent"
         android:layout_height="58dp"
@@ -61,7 +61,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/borda_aredondada"
         android:text="@string/TxtEntrar"
-        android:textColor="@color/BaseRoxo"
+        android:textColor="@color/CinzaClaro"
         app:backgroundTint="@color/BaseRosa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

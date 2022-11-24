@@ -1,7 +1,10 @@
 package com.example.tccappgameswave;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.tccappgameswave.Models.Carrinho;
@@ -40,6 +45,9 @@ public class Lista_Compras_Fragment extends Fragment {
 
     TextView txtViewTotal;
 
+    ProgressBar progressBar;
+    ConstraintLayout TelaToda;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +67,7 @@ public class Lista_Compras_Fragment extends Fragment {
 
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,6 +89,12 @@ public class Lista_Compras_Fragment extends Fragment {
         recyclerItemCarrinho.setFocusable(false);
         recyclerItemCarrinho.setVisibility(View.VISIBLE);
 
+        progressBar =(ProgressBar) view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
+        TelaToda =(ConstraintLayout) view.findViewById(R.id.TelaToda);
+        TelaToda.setVisibility(View.GONE);
+
         return view;
     }
 
@@ -95,6 +110,9 @@ public class Lista_Compras_Fragment extends Fragment {
                 if (response.isSuccessful()) {
                     ItemCarrinhoList = response.body();
                     adapter.setMovieList(ItemCarrinhoList);
+
+                    progressBar.setVisibility(View.GONE);
+                    TelaToda.setVisibility(View.VISIBLE);
                 }
             }
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.tccappgameswave.Models.Comentario;
@@ -49,6 +51,10 @@ public class DetelhesProd extends AppCompatActivity {
     ImageView imgProd, ImgClasInd;
     TextView textNomeProd, textCat, textDateLanc, textDesc, textPreco;
 
+    ProgressBar progressBar;
+    ScrollView TelaToda;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +74,11 @@ public class DetelhesProd extends AppCompatActivity {
          textDesc =(TextView) findViewById(R.id.textViewDesc);
          textPreco =(TextView) findViewById(R.id.textViewPreco);
 
+        progressBar =(ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
+        TelaToda =(ScrollView) findViewById(R.id.TelaToda);
+        TelaToda.setVisibility(View.GONE);
 
         //inicia o recyclerView
         recyclerView=(RecyclerView)findViewById(R.id.recyclerViewComentario);
@@ -100,11 +111,12 @@ public class DetelhesProd extends AppCompatActivity {
                 .client(okHttpClient)
                 .build();
 
-        //lista os jogos
+
+         //lista os jogos
         MostraUmProd();
 
-        //mostra comentarios
-        MostraComentarios();
+       //mostra comentarios
+      MostraComentarios();
 
         //volta
         ImageView btnVoltarHome = (ImageView) findViewById(R.id.imageViewVoltarHome);
@@ -126,7 +138,6 @@ public class DetelhesProd extends AppCompatActivity {
     }
 
     private void MostraUmProd() {
-
         //pesquisa
         RESTService restService = retrofitProd.create(RESTService.class);
         Call<Produto> call= restService.MostraProdDetalhes(codProd);
@@ -180,6 +191,9 @@ public class DetelhesProd extends AppCompatActivity {
                     }
                     else
                     textPreco.setText("R$"+precoProd);
+
+                    progressBar.setVisibility(View.GONE);
+                    TelaToda.setVisibility(View.VISIBLE);
                 }
             }
 

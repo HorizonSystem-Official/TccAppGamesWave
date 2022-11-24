@@ -34,7 +34,6 @@ public class Masks {
                 for (final char m : mask.toCharArray()) {
                     if (m != '#' && str.length() > old.length()) {
                         mascara += m;
-                        Log.i("Mask", mascara);
                         continue;
                     }
                     try {

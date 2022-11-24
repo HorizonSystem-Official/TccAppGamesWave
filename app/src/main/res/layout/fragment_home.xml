@@ -8,8 +8,10 @@
     tools:context=".HomeFragment">
 
     <ScrollView
+        android:id="@+id/TelaToda"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,6 +34,7 @@
             android:layout_marginEnd="26dp"
             android:background="@drawable/borda_bar_de_pesquisa"
             android:backgroundTint="#F1F1F1"
+            android:textColorHint="#757575"
             android:drawablePadding="5dp"
             android:textColor="@color/black"
             android:hint="@string/TxtPesc"
@@ -134,4 +137,10 @@
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/BaseRosa"
+        android:layout_gravity="center"/>
 </FrameLayout>

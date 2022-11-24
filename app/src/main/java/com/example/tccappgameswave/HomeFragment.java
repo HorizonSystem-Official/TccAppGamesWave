@@ -1,5 +1,6 @@
 package com.example.tccappgameswave;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -15,6 +16,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 
@@ -43,6 +46,9 @@ public class HomeFragment extends Fragment{
     EditText editPesquisa;
     String LinkApi;
 
+    ProgressBar progressBar;
+    ScrollView TelaToda;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +65,7 @@ public class HomeFragment extends Fragment{
         MostraProdsTiro();
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -117,6 +124,12 @@ public class HomeFragment extends Fragment{
         recyclerViewTerror.setAdapter(adapterTerror);
         recyclerViewRPG.setAdapter(adapterRPG);
 
+        progressBar =(ProgressBar) view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
+        TelaToda =(ScrollView) view.findViewById(R.id.TelaToda);
+        TelaToda.setVisibility(View.GONE);
+
         return view;
     }
 
@@ -134,7 +147,9 @@ public class HomeFragment extends Fragment{
                 if (response.isSuccessful()) {
                     produtoList = response.body();
                     adapterTiro.setMovieList(produtoList);
-                    Log.i("jOGOS DE TIRO", String.valueOf(adapterTiro));
+
+                    progressBar.setVisibility(View.GONE);
+                    TelaToda.setVisibility(View.VISIBLE);
                 }
             }
 

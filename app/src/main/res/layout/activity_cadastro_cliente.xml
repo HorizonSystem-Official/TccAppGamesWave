@@ -109,7 +109,7 @@
                 android:id="@+id/edit_textCPF"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:inputType="text"
+                android:inputType="number"
                 android:textColor="@color/CinzaClaro"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -6,5 +6,14 @@
     android:background="@color/BaseRoxo"
     android:id="@+id/toolbar"
     app:title=" "
-    style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface" />
+    style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface">
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="72dp"
+        app:srcCompat="@drawable/logogameswave" />
+</androidx.appcompat.widget.Toolbar>
 

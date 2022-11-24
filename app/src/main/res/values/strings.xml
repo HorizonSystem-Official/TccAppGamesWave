@@ -23,8 +23,8 @@
     <string name="TxtPesc">Pesquisar...</string>
 
     <!--Categoria -->
-    <string name="TxtCat">categoria</string>
-    <string name="TxtLanc">Lançamentos</string>
+    <string name="TxtCat">Categoria:</string>
+    <string name="TxtLanc">Lançamentos:</string>
     <string name="TxtTiro">Tiro</string>
     <string name="TxtRPG">RPG</string>
     <string name="TxtTerror">Terror</string>

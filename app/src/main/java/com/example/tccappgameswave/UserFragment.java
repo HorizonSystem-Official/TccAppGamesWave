@@ -1,5 +1,6 @@
 package com.example.tccappgameswave;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,17 +9,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.tccappgameswave.Models.Cliente;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
 public class UserFragment extends Fragment {
 
     String sCpf;
-    TextView txtViewNameCli,txtViewEmailCli;
+    TextView txtViewNameCli,txtViewEmailCli,fotoUser;
+    Button BtnSair;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,19 @@ public class UserFragment extends Fragment {
 
         txtViewNameCli=(TextView)view.findViewById(R.id.textViewNome);
         txtViewEmailCli=(TextView)view.findViewById(R.id.textViewEmail);
+        fotoUser=(TextView)view.findViewById(R.id.fotoUser);
+
+        //sair
+        BtnSair=(Button)view.findViewById(R.id.btnLogout);
+        BtnSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent TelaLogin = new Intent(getContext(), login.class);
+                startActivity(TelaLogin);
+                File file= new File("CodUser.txt");
+                file.delete();
+            }
+        });
 
         BancoDeDados db=new BancoDeDados(getActivity());
         Cliente cli= db.selecionaCliente(sCpf);
@@ -45,7 +62,10 @@ public class UserFragment extends Fragment {
             Log.i("Nome", "Nome: " + cli.getNomeCliente());
         }
 
-        txtViewNameCli.setText("Nome: " + cli.getNomeCliente());
+        String nomeCliente = cli.getNomeCliente();
+        String primeiraLetra = nomeCliente.substring(0,1);
+        fotoUser.setText(primeiraLetra);
+        txtViewNameCli.setText("Nome: " + nomeCliente);
         txtViewEmailCli.setText("Email: " + cli.getEmailCli());
 
         return view;
