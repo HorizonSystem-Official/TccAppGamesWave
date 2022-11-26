@@ -14,6 +14,7 @@
     <color name="Cinza">#8A97A0</color>
 
     <color name="BaseRosa">#A60F96</color>
+    <color name="BaseRosaEscuro">#730A68</color>
     <color name="BaseRoxo">#3D0159</color>
     <color name="BaseRoxoescuro">#3D003D</color>
 </resources>

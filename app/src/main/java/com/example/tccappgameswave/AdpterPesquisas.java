@@ -68,8 +68,6 @@ public class AdpterPesquisas extends RecyclerView.Adapter<AdpterPesquisas.Produt
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("Id prod:", String.valueOf(idProd));
-
                 Intent AbreProdFromPesq = new Intent(context, DetelhesProd.class);
                 AbreProdFromPesq.putExtra("codProduto",idProd);
                 AbreProdFromPesq.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

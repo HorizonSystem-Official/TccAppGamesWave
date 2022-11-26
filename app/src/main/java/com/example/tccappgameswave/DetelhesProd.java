@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -60,28 +58,28 @@ public class DetelhesProd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detelhes_prod);
 
-        readDataLinkApi();
-        readDataCpf();
-
+        //recupera dados
+         readDataLinkApi();
+         readDataCpf();
          Intent intent = getIntent();
          codProd = intent.getIntExtra("codProduto",0);
 
-         imgProd = (ImageView) findViewById(R.id.imgviewProd);
-         textNomeProd =(TextView) findViewById(R.id.textViewNomeProduto);
-         textCat =(TextView) findViewById(R.id.textViewCat);
-         ImgClasInd =(ImageView) findViewById(R.id.ImgClasInd);
-         textDateLanc =(TextView) findViewById(R.id.textViewDateLanc);
-         textDesc =(TextView) findViewById(R.id.textViewDesc);
-         textPreco =(TextView) findViewById(R.id.textViewPreco);
+         imgProd = findViewById(R.id.imgviewProd);
+         textNomeProd = findViewById(R.id.textViewNomeProduto);
+         textCat = findViewById(R.id.textViewCat);
+         ImgClasInd = findViewById(R.id.ImgClasInd);
+         textDateLanc = findViewById(R.id.textViewDateLanc);
+         textDesc =findViewById(R.id.textViewDesc);
+         textPreco = findViewById(R.id.textViewPreco);
 
-        progressBar =(ProgressBar) findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        TelaToda =(ScrollView) findViewById(R.id.TelaToda);
+        TelaToda =findViewById(R.id.TelaToda);
         TelaToda.setVisibility(View.GONE);
 
-        //inicia o recyclerView
-        recyclerView=(RecyclerView)findViewById(R.id.recyclerViewComentario);
+        //inicia o recyclerView dos comentarios
+        recyclerView=findViewById(R.id.recyclerViewComentario);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         adapter = new AdapterComentariosRecycler(getApplicationContext(), ListComent);
         recyclerView.setAdapter(adapter);
@@ -116,9 +114,9 @@ public class DetelhesProd extends AppCompatActivity {
         MostraUmProd();
 
        //mostra comentarios
-      MostraComentarios();
+       MostraComentarios();
 
-        //volta
+        //volta home
         ImageView btnVoltarHome = (ImageView) findViewById(R.id.imageViewVoltarHome);
         btnVoltarHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,7 +145,6 @@ public class DetelhesProd extends AppCompatActivity {
             @Override
             public void onResponse(Call<Produto> call, Response<Produto> response) {
                 if (response.isSuccessful()) {
-
                     prod=response.body();
 
                     //mostra dados na tela
@@ -180,7 +177,6 @@ public class DetelhesProd extends AppCompatActivity {
                             ImgClasInd.setImageResource(R.drawable.classind_14);
                     }
 
-
                     textDateLanc.setText(prod.getProdAnoLanc());
                     textDesc.setText(prod.getProdDesc());
 
@@ -204,8 +200,8 @@ public class DetelhesProd extends AppCompatActivity {
         });
     }
 
+    //mostra os comentarios do produto
     private void MostraComentarios() {
-        //pesquisa
         RESTService restService = retrofitComent.create(RESTService.class);
         Call<List<Comentario>> call= restService.ListComentarios(codProd);
         //executa e mostra a requisisao
@@ -232,12 +228,11 @@ public class DetelhesProd extends AppCompatActivity {
         itemCarrinho.setCpf(cpf);
         return itemCarrinho;
     }
+    //adiciona o item ao carrinho
     private void AddItemCar(ItemCarrinho itemCarrinho){
-
         RESTService restService= retrofitAddItem.create(RESTService.class);
-        Log.i("codigo", String.valueOf(codProd));
         Call<Void> call= restService.AddItensCarrinho(itemCarrinho);
-        call.enqueue(new Callback<Void>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()){
@@ -247,7 +242,6 @@ public class DetelhesProd extends AppCompatActivity {
                     TelaHome.putExtra("codFragment",codFragment);
                     startActivity(TelaHome);
                 }
-                Log.i("Deu certo:", String.valueOf(response.code()));
             }
 
             @Override

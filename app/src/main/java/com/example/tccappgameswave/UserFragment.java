@@ -55,13 +55,6 @@ public class UserFragment extends Fragment {
         BancoDeDados db=new BancoDeDados(getActivity());
         Cliente cli= db.selecionaCliente(sCpf);
 
-        if(db.selecionaCliente(sCpf)==null){
-            Log.i("Nome", "Não deu");
-        }
-        else{
-            Log.i("Nome", "Nome: " + cli.getNomeCliente());
-        }
-
         String nomeCliente = cli.getNomeCliente();
         String primeiraLetra = nomeCliente.substring(0,1);
         fotoUser.setText(primeiraLetra);

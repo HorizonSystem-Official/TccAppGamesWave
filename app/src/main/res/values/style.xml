@@ -4,6 +4,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TxtPadraoTxtClaro">
@@ -27,6 +28,12 @@
         <item name="android:layout_marginStart">12dp</item>
     </style>
 
+    <style name="EditPadrao">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textColor">@color/CinzaClaro</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
     <style name="BtnPadraoConta">
         <item name="android:layout_width">match_parent</item>

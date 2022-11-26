@@ -49,6 +49,7 @@ public class Pesquisa extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create()) //conversor
                 .build();
 
+        //pesquisa os produtas e configura a lista
         PesquisaProds();
         recyclerViewPesquisa=(RecyclerView)findViewById(R.id.ListItensPesquisa);
         recyclerViewPesquisa.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
@@ -84,22 +85,20 @@ public class Pesquisa extends AppCompatActivity {
         });
     }
 
+    //faz um outra pesquisa
     private void PesquisaProds() {
-        //pega pesquisa
         Intent intent = getIntent();
         String Txtpesquisa= intent.getStringExtra("TxtPesquisa");
 
         //pesquisa
         RESTService restService = retrofitPesquisaProd.create(RESTService.class);
         Call<List<Produto>> call= restService.PesquisaProduto(Txtpesquisa);
-        //executa e mostra a requisisao
-        call.enqueue(new Callback<List<Produto>>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
                     produtoList = response.body();
                     adapterPesquisas.setMovieList(produtoList);
-                    Log.i("jOGOS Pesquisados", String.valueOf(produtoList));
                 }
             }
 
@@ -120,12 +119,11 @@ public class Pesquisa extends AppCompatActivity {
             String TxtPesquisa=editPesquisa.getText().toString();
 
             this.finish();
-            //abre a tela pesquisa
+            //abre a tela pesquisa e manda o texto para pesquisa
             Intent TelaPesqusia = new Intent(getApplicationContext(),Pesquisa.class);
             TelaPesqusia.putExtra("TxtPesquisa",TxtPesquisa);
             startActivity(TelaPesqusia);
         }
-
     }
 
     //ler Link Da api da memoria

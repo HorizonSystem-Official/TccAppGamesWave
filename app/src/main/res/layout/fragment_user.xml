@@ -7,7 +7,6 @@
     android:background="@color/BaseRoxo"
     tools:context=".UserFragment">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -55,8 +54,8 @@
                 android:id="@+id/info_conta"
                 style="@style/BtnPadraoConta"
                 android:layout_marginTop="44dp"
-                android:text="Meus pedidos"
-                app:backgroundTint="@color/BaseRoxoescuro"
+                android:text="@string/TxtPedidos"
+                app:backgroundTint="@color/BaseRosaEscuro"
                 android:textColor="@color/CinzaClaro"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,8 +64,8 @@
             <Button
                 android:id="@+id/btnChengeData"
                 style="@style/BtnPadraoConta"
-                android:text="Alterar Dados"
-                app:backgroundTint="@color/BaseRoxoescuro"
+                android:text="@string/TxtAlterdados"
+                app:backgroundTint="@color/BaseRosaEscuro"
                 android:textColor="@color/CinzaClaro"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +86,7 @@
                 style="@style/BtnPadraoConta"
                 android:text="@string/TxtTermosCond"
                 android:layout_marginTop="16dp"
-                app:backgroundTint="@color/BaseRoxoescuro"
+                app:backgroundTint="@color/BaseRosaEscuro"
                 android:textColor="@color/CinzaClaro"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +96,7 @@
                 android:id="@+id/button6"
                 style="@style/BtnPadraoConta"
                 android:text="@string/TxtSuporte"
-                app:backgroundTint="@color/BaseRoxoescuro"
+                app:backgroundTint="@color/BaseRosaEscuro"
                 android:textColor="@color/CinzaClaro"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

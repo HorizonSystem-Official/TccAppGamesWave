@@ -57,7 +57,7 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
 
     @Override
     public void onBindViewHolder(@NonNull AdapterListItensRecycler.ItemViewHolder holder, int position) {
-//define da onde vem os valores
+        //define da onde vem os valores
         Picasso.get()
                 .load(ItemCarrinhoList.get(position).getImgCapa())
                 .placeholder(R.mipmap.ic_launcher_round)
@@ -74,8 +74,6 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("Id prod", String.valueOf(idProd));
-
                 Intent AbreProd = new Intent(context, DetelhesProd.class);
                 AbreProd.putExtra("codProduto",idProd);
                 context.startActivity(AbreProd);
@@ -124,6 +122,7 @@ public abstract class AdapterListItensRecycler extends RecyclerView.Adapter<Adap
         }
     }
 
+    //remove o iten do carrinho
     private void removeItem(int codProd, String cpf) {
         readDataLinkApi();
         //mostra prod

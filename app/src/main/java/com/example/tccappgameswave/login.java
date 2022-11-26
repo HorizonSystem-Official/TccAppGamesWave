@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,8 +45,8 @@ public class login extends AppCompatActivity {
         File file= new File("CodUser.txt");
         file.delete();
 
-        emailEdt =(EditText) findViewById(R.id.editUserLogin);
-        senhaEdt =(EditText) findViewById(R.id.EditSenhaLogin);
+        emailEdt =findViewById(R.id.editUserLogin);
+        senhaEdt = findViewById(R.id.EditSenhaLogin);
 
         //faz o login
         retrofitLoginCli= new Retrofit.Builder()
@@ -61,7 +60,7 @@ public class login extends AppCompatActivity {
                 addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        TextView txtEsqueceu = (TextView) findViewById(R.id.txtEsqueceu);
+        TextView txtEsqueceu = findViewById(R.id.txtEsqueceu);
         txtEsqueceu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +68,7 @@ public class login extends AppCompatActivity {
             }
         });
 
-        TextView TxtCriarConta = (TextView) findViewById(R.id.TxtCriarConta);
+        TextView TxtCriarConta =findViewById(R.id.TxtCriarConta);
         TxtCriarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +76,7 @@ public class login extends AppCompatActivity {
             }
         });
 
-        Button btnLogin = (Button) findViewById(R.id.btnLogin);
+        Button btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +97,6 @@ public class login extends AppCompatActivity {
         startActivity(CriaConta);
     }
 
-
     private void LoginCli(String emailcli, String senhaCli) {
         RESTService restService = retrofitLoginCli.create(RESTService.class);
         Call<Cliente> call= restService.LoginCliente(emailcli, senhaCli);
@@ -110,8 +108,11 @@ public class login extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     cli=response.body();
 
+                    if(emailEdt.equals("") || senhaEdt.equals("")){
+                        Toast.makeText(getApplicationContext(),"Preencha os campos", Toast.LENGTH_LONG).show();
+                    }
                     //se nã0 existir mensagem de erro
-                    if(cli.getCPF()==null){
+                    else if(cli.getCPF()==null){
                         Toast.makeText(getApplicationContext(),"Senha ou Email Incorretos", Toast.LENGTH_LONG).show();
                     }
                     //se exixtir grava na memoria e abre home
@@ -173,12 +174,11 @@ public class login extends AppCompatActivity {
         }
     }
 
+    //pesqusia os dados para inserir no banco
     private void MostraCli(String cpf) {
-        //pesquisa
         RESTService restService = retrofitDetalhesCli.create(RESTService.class);
         Call<Cliente> call= restService.DetalhesCliente(cpf);
-        //executa e mostra a requisisao
-        call.enqueue(new Callback<Cliente>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Cliente> call, Response<Cliente> response) {
                 if (response.isSuccessful()) {

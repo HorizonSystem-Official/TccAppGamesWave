@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
@@ -45,8 +44,8 @@ public class Home extends AppCompatActivity implements
         Intent intent = getIntent();
         int codFragment = intent.getIntExtra("codFragment",0);
 
+        //se cod 1 avi abrir carrionho
         if(codFragment==1){
-            //inicia na list
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new Lista_Compras_Fragment()).commit();
         }
@@ -56,7 +55,6 @@ public class Home extends AppCompatActivity implements
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
         }
-
     }
 
     //muda tela
@@ -84,8 +82,6 @@ public class Home extends AppCompatActivity implements
                 File file= new File("CodUser.txt");
                 file.delete();
                 break;
-
-
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

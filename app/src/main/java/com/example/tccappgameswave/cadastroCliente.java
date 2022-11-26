@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tccappgameswave.Models.Cliente;
@@ -36,17 +35,19 @@ public class cadastroCliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_cliente);
 
-        editNome =(EditText) findViewById(R.id.edit_textNome);
-        editEmail =(EditText) findViewById(R.id.edit_textEmail);
-        editCpf =(EditText) findViewById(R.id.edit_textCPF);
-        editDataNasc =(EditText) findViewById(R.id.edit_textDataNasc);
-        editTel =(EditText) findViewById(R.id.edit_textTel);
-        editSenha =(EditText) findViewById(R.id.edit_textSenha);
+        editNome = findViewById(R.id.edit_textNome);
+        editEmail = findViewById(R.id.edit_textEmail);
+        editCpf =findViewById(R.id.edit_textCPF);
+        editDataNasc = findViewById(R.id.edit_textDataNasc);
+        editTel = findViewById(R.id.edit_textTel);
+        editSenha = findViewById(R.id.edit_textSenha);
 
+        //mascaras
         editCpf.addTextChangedListener(Masks.mask(editCpf, "###.###.###-##"));
         editDataNasc.addTextChangedListener(Masks.mask(editDataNasc, "##/##/####"));
         editTel.addTextChangedListener(Masks.mask(editTel, "(##) #####-####"));
 
+        //recebe o link da api
         readDataLinkApi();
 
         retrofitCli = new Retrofit.Builder()
@@ -54,8 +55,8 @@ public class cadastroCliente extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create()) //conversor
                 .build();
 
-
-        ImageView imgVoltar = (ImageView) findViewById(R.id.imageViewVoltar);
+        //login
+        ImageView imgVoltar = findViewById(R.id.imageViewVoltar);
         imgVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,8 +64,8 @@ public class cadastroCliente extends AppCompatActivity {
             }
         });
 
-        //adiciona ao carrinho
-        Button btnAddCli = (Button) findViewById(R.id.btnCadastro);
+        //adiciona um novo cliente
+        Button btnAddCli = findViewById(R.id.btnCadastro);
         btnAddCli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +80,6 @@ public class cadastroCliente extends AppCompatActivity {
     }
 
     private void AddNovoCliente() {
-
         RESTService restService = retrofitCli.create(RESTService.class);
 
         CliNome = editNome.getText().toString();
@@ -95,16 +95,14 @@ public class cadastroCliente extends AppCompatActivity {
             Cliente item = new Cliente(CliCpf, CliNome, CliNasc, CliSenha, CliTel, CliEmail);
 
             Call<Void> call = restService.addCliente(item);
-            call.enqueue(new Callback<Void>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "User criado", Toast.LENGTH_SHORT).show();
                         //abre login
                         TelaLogin();
-                        Toast.makeText(getApplicationContext(), "User criado", Toast.LENGTH_SHORT).show();
                     }
-
-                    Log.i("Deu certo:", String.valueOf(response.code()));
                 }
 
                 @Override

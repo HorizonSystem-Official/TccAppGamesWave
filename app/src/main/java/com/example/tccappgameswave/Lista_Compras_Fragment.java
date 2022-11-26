@@ -1,6 +1,5 @@
 package com.example.tccappgameswave;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,15 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.tccappgameswave.Models.Carrinho;
 import com.example.tccappgameswave.Models.ItemCarrinho;
-import com.example.tccappgameswave.Models.Venda;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -60,7 +56,7 @@ public class Lista_Compras_Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ItemCarrinhoList = new ArrayList<>();
-
+        //de dados
         readDataLinkApi();
         readDataCpf();
 
@@ -72,16 +68,14 @@ public class Lista_Compras_Fragment extends Fragment {
 
         //lista os itens
         MostraItemCarrinho();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_lista__compras_, container, false);
 
-        txtViewTotal=(TextView)view.findViewById(R.id.textViewTotal);
+        txtViewTotal=view.findViewById(R.id.textViewTotal);
 
         //inicia o recyclerView
         recyclerItemCarrinho=(RecyclerView)view.findViewById(R.id.ListItensCarrinho);
@@ -96,26 +90,18 @@ public class Lista_Compras_Fragment extends Fragment {
         recyclerItemCarrinho.setFocusable(false);
         recyclerItemCarrinho.setVisibility(View.VISIBLE);
 
-        imgCarrinhoVazio =(ImageView) view.findViewById(R.id.imageViewCarrinhoVazio);
-        imgCarrinhoVazio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Home();
-            }
-        });
+        //se carrinho vazio deixa abri home
+        imgCarrinhoVazio =view.findViewById(R.id.imageViewCarrinhoVazio);
+        imgCarrinhoVazio.setOnClickListener(viewList ->Home());
 
-        textViewCarrinhoVazio =(TextView) view.findViewById(R.id.textViewCarrinhoVazio);
-        textViewCarrinhoVazio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Home();
-            }
-        });
+        //se carrinho vazio deixa abri home
+        textViewCarrinhoVazio =view.findViewById(R.id.textViewCarrinhoVazio);
+        textViewCarrinhoVazio.setOnClickListener(viewList -> Home());
 
-        progressBar =(ProgressBar) view.findViewById(R.id.progressBar);
+        progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        TelaToda =(ConstraintLayout) view.findViewById(R.id.TelaToda);
+        TelaToda =view.findViewById(R.id.TelaToda);
         TelaToda.setVisibility(View.GONE);
 
         //abre recibo
@@ -130,10 +116,10 @@ public class Lista_Compras_Fragment extends Fragment {
     }
 
     private  void ShowDialog(){
+            //array de formas de pagamento
             String [] FormPag={"Cartão", "Pix", "Boleto"};
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-            alert.setTitle("Pagamento");
-            //alert.setMessage("Selecione o metodo de pagamento");
+            alert.setTitle("Selecione o metodo de pagamento");
             alert.setSingleChoiceItems(FormPag, -1, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int whitch) {
@@ -163,18 +149,20 @@ public class Lista_Compras_Fragment extends Fragment {
         Intent TelaHome = new Intent(getContext(), Home.class);
         startActivity(TelaHome);
     }
+
+    //mostra o carrinho
     private void MostraItemCarrinho() {
-        //pesquisa
         RESTService restService = retrofitItensCarrinho.create(RESTService.class);
         Call<List<ItemCarrinho>> call= restService.ItensCarrinho(sCpf);
         //executa e mostra a requisisao
-        call.enqueue(new Callback<List<ItemCarrinho>>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<ItemCarrinho>> call, Response<List<ItemCarrinho>> response) {
                 if (response.isSuccessful()) {
                     ItemCarrinhoList = response.body();
                     adapter.setMovieList(ItemCarrinhoList);
 
+                    //se o carrinho estiver vazio
                     if(ItemCarrinhoList.isEmpty()){
                         btnPagar.setEnabled(false);
                         txtViewTotal.setText("R$ 00.00");
@@ -196,11 +184,11 @@ public class Lista_Compras_Fragment extends Fragment {
         });
     }
 
+    //valor total
     private void MostraTotalCarrinho() {
-        //pesquisa
         RESTService restService = retrofitItensCarrinho.create(RESTService.class);
         Call<Carrinho> call= restService.valorTotalCarrrinho(sCpf);
-        call.enqueue(new Callback<Carrinho>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Carrinho> call, Response<Carrinho> response) {
                 if (response.isSuccessful()) {

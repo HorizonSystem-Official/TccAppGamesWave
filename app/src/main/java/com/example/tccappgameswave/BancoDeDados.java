@@ -11,8 +11,6 @@ import com.example.tccappgameswave.Models.Cliente;
 
 
 public class BancoDeDados extends SQLiteOpenHelper {
-
-
     //vars Tb Cliente
     public static final String Tabela_Cliente = "TbCliente";
     public static final String Coluna_CPFCli = "CPFCli";
@@ -29,7 +27,6 @@ public class BancoDeDados extends SQLiteOpenHelper {
         super(context, DATABASE_Nome, null, DATABASE_VERSION);
 
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -61,14 +58,6 @@ public class BancoDeDados extends SQLiteOpenHelper {
         values.put(Coluna_EmailCli, cliente.getEmailCli());
 
         db.insert(Tabela_Cliente, null, values);
-        db.close();
-    }
-
-    //delete
-    void ApagaCli(Cliente cliente){
-        SQLiteDatabase db=this.getWritableDatabase();
-
-        db.delete(Tabela_Cliente, Coluna_CPFCli+"= ?", new String[]{String.valueOf(cliente.getCPF())});
         db.close();
     }
 

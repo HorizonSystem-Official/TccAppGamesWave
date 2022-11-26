@@ -22,7 +22,6 @@ import jp.wasabeef.picasso.transformations.CropSquareTransformation;
 
 public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycler.ProdutoViewHolder> {
 
-
     Context context;
     List<Produto> produtoList;
 
@@ -56,6 +55,7 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
 
         String prodNome =produtoList.get(position).getProdNome();
 
+        //define tamanho do nome
         if(prodNome.length()>12){
             holder.txtViewProdNome.setText(prodNome.substring(0, 9)+"...");
         }else {
@@ -89,7 +89,6 @@ public class AdapterHomeRecycler extends RecyclerView.Adapter<AdapterHomeRecycle
         return produtoList == null ? 0 : produtoList.size();
     }
 
-    //define os campo com o layout
     public class ProdutoViewHolder extends RecyclerView.ViewHolder {
         ImageView imgviewProd;
         TextView txtViewProdNome;

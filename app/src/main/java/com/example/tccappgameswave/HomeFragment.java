@@ -70,19 +70,14 @@ public class HomeFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
 
-        ImageView banner=(ImageView) view.findViewById(R.id.banner);
-        banner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DetelhesProd();
-            }
-        });
+        ImageView banner= view.findViewById(R.id.banner);
+        banner.setOnClickListener(view1 -> DetelhesProd());
 
 
-        editPesquisa=(EditText) view.findViewById(R.id.TxtEdtPesquisa);
+        //ao cliacr no enter ele pesquisa
+        editPesquisa= view.findViewById(R.id.TxtEdtPesquisa);
         editPesquisa.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int i, KeyEvent keyEvent) {
@@ -93,7 +88,8 @@ public class HomeFragment extends Fragment{
             }
         });
 
-        ImageView BtnPesquisa=(ImageView) view.findViewById(R.id.imageViewPesquisa);
+
+        ImageView BtnPesquisa= view.findViewById(R.id.imageViewPesquisa);
         BtnPesquisa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,10 +125,10 @@ public class HomeFragment extends Fragment{
         recyclerViewRPG.setAdapter(adapterRPG);
         recyclerViewSimula.setAdapter(adapterSimula);
 
-        progressBar =(ProgressBar) view.findViewById(R.id.progressBar);
+        progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        TelaToda =(ScrollView) view.findViewById(R.id.TelaToda);
+        TelaToda =view.findViewById(R.id.TelaToda);
         TelaToda.setVisibility(View.GONE);
 
         return view;
@@ -141,12 +137,10 @@ public class HomeFragment extends Fragment{
     private void MostraProdsTiro() {
         //pega categoria
         String sCat = "Tiro";
-
-        //pesquisa
         RESTService restService = retrofitHomeProd.create(RESTService.class);
         Call<List<Produto>> call= restService.MostraProdPorCat(sCat);
         //executa e mostra a requisisao
-        call.enqueue(new Callback<List<Produto>>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
@@ -168,11 +162,8 @@ public class HomeFragment extends Fragment{
     private void MostraProdsSimulacao() {
         //pega categoria
         String sCat = "Simulação";
-
-        //pesquisa
         RESTService restService = retrofitHomeProd.create(RESTService.class);
         Call<List<Produto>> call= restService.MostraProdPorCat(sCat);
-        //executa e mostra a requisisao
         call.enqueue(new Callback<List<Produto>>() {
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
@@ -192,12 +183,10 @@ public class HomeFragment extends Fragment{
     private void MostraProdsRPG() {
         //pega categoria
         String sCat = "RPG";
-
-        //pesquisa
         RESTService restService = retrofitHomeProd.create(RESTService.class);
         Call<List<Produto>> call= restService.MostraProdPorCat(sCat);
         //executa e mostra a requisisao
-        call.enqueue(new Callback<List<Produto>>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {
@@ -216,12 +205,10 @@ public class HomeFragment extends Fragment{
     private void MostraProdsTerror() {
         //pega categoria
         String sCat = "Terror";
-
-        //pesquisa
         RESTService restService = retrofitHomeProd.create(RESTService.class);
         Call<List<Produto>> call= restService.MostraProdPorCat(sCat);
         //executa e mostra a requisisao
-        call.enqueue(new Callback<List<Produto>>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.isSuccessful()) {

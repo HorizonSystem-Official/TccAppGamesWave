@@ -83,33 +83,24 @@ public class TelaRecibo extends AppCompatActivity {
         });
     }
 
+    //mostra o recibo com dados da compra
     private void MostraRecibo() {
-        //pesquisa
         RESTService restService = retrofitrecibo.create(RESTService.class);
         Call<Venda> call= restService.Recibo(sCpf);
-        call.enqueue(new Callback<Venda>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Venda> call, Response<Venda> response) {
                 if (response.isSuccessful()) {
                     venda=response.body();
 
+                    //recebe nome do banco
                     BancoDeDados db=new BancoDeDados(getApplicationContext());
                     Cliente cli= db.selecionaCliente(sCpf);
-
-                    if(db.selecionaCliente(sCpf)==null){
-                        Log.i("Nome", "Não deu");
-                    }
-                    else{
-                        Log.i("Nome", "Nome: " + cli.getNomeCliente());
-                    }
-
 
                     String Cpf=String.valueOf(venda.getClinte_CPF());
                     String FormaPag=String.valueOf(venda.getFormaPag());
                     String Parcelas=String.valueOf(venda.getParcela());
 
-
-                    Log.d("Forma de pagamento",FormaPag);
                     txtNomeUser.setText("Nome: "+cli.getNomeCliente());
                     txtCpfUser.setText("CPF: "+Cpf);
                     txtMeioPag.setText(FormaPag);
@@ -146,19 +137,17 @@ public class TelaRecibo extends AppCompatActivity {
         return venda;
     }
 
+    //metodo para efetuar a compra
     private void FazVenda(Venda venda){
-
         RESTService restService= retrofitVenda.create(RESTService.class);
         Call<Void> call= restService.EfetuaCompra(venda);
-        call.enqueue(new Callback<Void>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()){
-                    //abre tela de lista de carrinho
+                    //se compra for sucedida, abre o recibo
                     MostraRecibo();
-                    Log.i("Deu certo:", "Abriu recibo");
                 }
-                Log.i("Deu certo:", String.valueOf(response.code()));
             }
 
             @Override
