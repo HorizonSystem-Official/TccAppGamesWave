@@ -27,6 +27,7 @@
             android:layout_below="@id/imgviewProd"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
+            android:layout_marginStart="6dp"
             android:gravity="start"
             android:text="Jogo Title"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -35,13 +36,16 @@
 
         <TextView
             android:id="@+id/TxtViewProdPreco"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtViewProdNome"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
             android:gravity="start"
-            android:text="Preço"
+            android:background="@drawable/borda_pouco_aredondada"
+            android:backgroundTint="@color/BaseRosa"
+            android:text="R$44.49"
+            android:paddingEnd="7dp"
+            android:paddingStart="7dp"
             android:textColor="@color/white"
             android:textSize="16sp" />
 

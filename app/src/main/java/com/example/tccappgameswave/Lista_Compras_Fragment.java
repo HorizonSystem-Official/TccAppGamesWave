@@ -1,10 +1,12 @@
 package com.example.tccappgameswave;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,12 +15,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.tccappgameswave.Models.Carrinho;
 import com.example.tccappgameswave.Models.ItemCarrinho;
+import com.example.tccappgameswave.Models.Venda;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -43,11 +49,13 @@ public class Lista_Compras_Fragment extends Fragment {
     String sCpf;
     String LinkApi;
 
-    TextView txtViewTotal;
-
+    TextView txtViewTotal, textViewCarrinhoVazio;
+    ImageView imgCarrinhoVazio;
+    String FormPagSelect;
     ProgressBar progressBar;
     ConstraintLayout TelaToda;
 
+    Button btnPagar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +64,7 @@ public class Lista_Compras_Fragment extends Fragment {
         readDataLinkApi();
         readDataCpf();
 
+        //carrinho
         retrofitItensCarrinho = new Retrofit.Builder()
                 .baseUrl(LinkApi+"Carrinho/")                                       //endere-ço do webservice
                 .addConverterFactory(GsonConverterFactory.create()) //conversor
@@ -63,11 +72,9 @@ public class Lista_Compras_Fragment extends Fragment {
 
         //lista os itens
         MostraItemCarrinho();
-        MostraTotalCarrinho();
 
     }
 
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,20 +96,77 @@ public class Lista_Compras_Fragment extends Fragment {
         recyclerItemCarrinho.setFocusable(false);
         recyclerItemCarrinho.setVisibility(View.VISIBLE);
 
+        imgCarrinhoVazio =(ImageView) view.findViewById(R.id.imageViewCarrinhoVazio);
+        imgCarrinhoVazio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Home();
+            }
+        });
+
+        textViewCarrinhoVazio =(TextView) view.findViewById(R.id.textViewCarrinhoVazio);
+        textViewCarrinhoVazio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Home();
+            }
+        });
+
         progressBar =(ProgressBar) view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
         TelaToda =(ConstraintLayout) view.findViewById(R.id.TelaToda);
         TelaToda.setVisibility(View.GONE);
 
+        //abre recibo
+        btnPagar=(Button) view.findViewById(R.id.btnPagar);
+        btnPagar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowDialog();
+            }
+        });
         return view;
     }
 
+    private  void ShowDialog(){
+            String [] FormPag={"Cartão", "Pix", "Boleto"};
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+            alert.setTitle("Pagamento");
+            //alert.setMessage("Selecione o metodo de pagamento");
+            alert.setSingleChoiceItems(FormPag, -1, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int whitch) {
+                    FormPagSelect= FormPag[whitch];
+                }
+            });
+
+            alert.setPositiveButton("Confirmar Compra", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent AbreRceibo = new Intent(getContext(),TelaRecibo.class);
+                    AbreRceibo.putExtra("FormPagSelect",FormPagSelect);
+                    startActivity(AbreRceibo);
+                }
+            });
+
+            alert.setNegativeButton("Sair", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            alert.show();
+    }
+
+    public  void Home(){
+        Intent TelaHome = new Intent(getContext(), Home.class);
+        startActivity(TelaHome);
+    }
     private void MostraItemCarrinho() {
         //pesquisa
         RESTService restService = retrofitItensCarrinho.create(RESTService.class);
         Call<List<ItemCarrinho>> call= restService.ItensCarrinho(sCpf);
-        Log.i("Lista de Jogos", sCpf);
         //executa e mostra a requisisao
         call.enqueue(new Callback<List<ItemCarrinho>>() {
             @Override
@@ -110,6 +174,15 @@ public class Lista_Compras_Fragment extends Fragment {
                 if (response.isSuccessful()) {
                     ItemCarrinhoList = response.body();
                     adapter.setMovieList(ItemCarrinhoList);
+
+                    if(ItemCarrinhoList.isEmpty()){
+                        btnPagar.setEnabled(false);
+                        txtViewTotal.setText("R$ 00.00");
+                        imgCarrinhoVazio.setVisibility(View.VISIBLE);
+                        textViewCarrinhoVazio.setVisibility(View.VISIBLE);
+                    }
+                    else
+                        MostraTotalCarrinho();
 
                     progressBar.setVisibility(View.GONE);
                     TelaToda.setVisibility(View.VISIBLE);

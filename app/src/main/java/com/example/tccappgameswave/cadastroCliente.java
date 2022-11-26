@@ -89,7 +89,7 @@ public class cadastroCliente extends AppCompatActivity {
         CliTel = editTel.getText().toString();
         CliSenha = editSenha.getText().toString();
 
-        if (CliNome == null || CliEmail == null || CliCpf == null || CliNasc == null || CliTel == null) {
+        if (CliNome.equals("") || CliEmail.equals("")|| CliCpf.equals("")|| CliNasc.equals("") || CliTel.equals("")) {
             Toast.makeText(getApplicationContext(), "Preencha Todos os Campos", Toast.LENGTH_SHORT).show();
         } else {
             Cliente item = new Cliente(CliCpf, CliNome, CliNasc, CliSenha, CliTel, CliEmail);

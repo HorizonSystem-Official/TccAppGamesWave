@@ -111,12 +111,22 @@
             tools:listitem="@layout/produto_item"
             tools:visibility="visible" />
 
+        <ImageView
+            android:id="@+id/imageViewBannerTerror"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/banner_terror"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview_ProdCatTerror" />
+
         <View
             android:id="@+id/line_3"
             style="@style/StyleLinha"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerview_ProdCatTerror" />
+            app:layout_constraintTop_toBottomOf="@id/imageViewBannerTerror" />
 
         <TextView
             android:id="@+id/txtViewRPG"
@@ -135,6 +145,32 @@
             app:layout_constraintTop_toBottomOf="@+id/txtViewRPG"
             tools:listitem="@layout/produto_item"
             tools:visibility="visible" />
+
+        <View
+            android:id="@+id/line_4"
+            style="@style/StyleLinha"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_ProdCatTiro" />
+
+        <TextView
+            android:id="@+id/txtViewSimala"
+            style="@style/TxtPadraoTxtClaro"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="18dp"
+            android:textStyle="bold"
+            android:text="@string/txtViewSimula"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_4" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_ProdCatSiluma"
+            style="@style/StyleRecyclerHome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewSimala"
+            tools:listitem="@layout/produto_item"
+            tools:visibility="visible" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <ProgressBar
@@ -142,5 +178,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/BaseRosa"
+        android:visibility="invisible"
         android:layout_gravity="center"/>
 </FrameLayout>

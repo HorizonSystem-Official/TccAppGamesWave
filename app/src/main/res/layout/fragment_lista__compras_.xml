@@ -76,6 +76,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTotal" />
 
+        <TextView
+            android:id="@+id/textViewCarrinhoVazio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginTop="26dp"
+            android:text="@string/TxtVazioCarrinho"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/ListItensCarrinho"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/ListItensCarrinho"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewCarrinhoVazio"/>
+
+        <ImageView
+            android:id="@+id/imageViewCarrinhoVazio"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="86dp"
+            android:visibility="invisible"
+            android:src="@drawable/shopping_cart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ListItensCarrinho" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout >
 </FrameLayout>

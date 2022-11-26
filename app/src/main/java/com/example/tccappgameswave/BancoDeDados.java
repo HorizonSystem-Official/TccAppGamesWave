@@ -3,6 +3,7 @@ package com.example.tccappgameswave;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -88,5 +89,12 @@ public class BancoDeDados extends SQLiteOpenHelper {
         return cli;
     }
 
+    //conta users
+    public int numeroDeUsers(String cpf) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int numUsers = (int) DatabaseUtils.queryNumEntries(db, Tabela_Cliente,Coluna_CPFCli+"=?" ,new String[]{cpf});
+        return numUsers;
+    }
 
 }

@@ -5,6 +5,7 @@ import com.example.tccappgameswave.Models.Cliente;
 import com.example.tccappgameswave.Models.Comentario;
 import com.example.tccappgameswave.Models.ItemCarrinho;
 import com.example.tccappgameswave.Models.Produto;
+import com.example.tccappgameswave.Models.Venda;
 
 import java.util.List;
 
@@ -40,7 +41,6 @@ public interface RESTService {
 
     //add item ao carrinho
     @POST("addItemCarrinho")
-   // Call<ItemCarrinho> AddItensCarrinho(@Body ItemCarrinho itemCarrinho);
     Call<Void> AddItensCarrinho(@Body ItemCarrinho itemCarrinho);
 
     //mostra itens do carrinho
@@ -63,8 +63,17 @@ public interface RESTService {
     Call<Cliente> LoginCliente(@Query("Emailcli") String email, @Query("senhaCli") String senha);
 
     @GET("DadosCli?")
-    Call<Cliente> DetalhesCliente(@Query("CpfCli") String email);
+    Call<Cliente> DetalhesCliente(@Query("CpfCli") String cpf);
 
     @POST("addCliente")
     Call<Void> addCliente(@Body Cliente cliente);
+
+    //*********************//
+    //      Venda         //
+    //*********************//
+    @GET("Recibo?")
+    Call<Venda> Recibo(@Query("cpf") String cpf);
+
+    @POST("EfetuaCompra")
+    Call<Void> EfetuaCompra(@Body Venda venda);
 }

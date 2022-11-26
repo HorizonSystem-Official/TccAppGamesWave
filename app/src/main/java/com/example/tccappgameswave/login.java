@@ -13,8 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tccappgameswave.Models.Cliente;
-import com.example.tccappgameswave.Models.Produto;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -118,11 +116,11 @@ public class login extends AppCompatActivity {
                     }
                     //se exixtir grava na memoria e abre home
                     else {
+                        //grava no slqite
+                        MostraCli(cli.getCPF());
                         dataCpfCli = cli.getCPF();
                         //grava na meoria interna
                         gravaDataCpf();
-                        //grava no slqite
-                        MostraCli();
 
                         Intent Home = new Intent(getApplicationContext(),Home.class);
                         startActivity(Home);
@@ -175,21 +173,20 @@ public class login extends AppCompatActivity {
         }
     }
 
-    private void MostraCli() {
+    private void MostraCli(String cpf) {
         //pesquisa
         RESTService restService = retrofitDetalhesCli.create(RESTService.class);
-        Call<Cliente> call= restService.DetalhesCliente(dataCpfCli);
+        Call<Cliente> call= restService.DetalhesCliente(cpf);
         //executa e mostra a requisisao
         call.enqueue(new Callback<Cliente>() {
             @Override
             public void onResponse(Call<Cliente> call, Response<Cliente> response) {
                 if (response.isSuccessful()) {
                     cli = response.body();
-                    if(db.selecionaCliente(cli.getCPF())==null){
+                    //inseri no sqlite
+                    if(db.numeroDeUsers(cli.getCPF())==0) {
                         db.addCli(new Cliente(cli.getCPF(), cli.getNomeCliente(), cli.getDataNasc(), cli.getTelCli(), cli.getEmailCli()));
-                        Log.i("Inseriu", "sim");
                     }
-
                 }
             }
 

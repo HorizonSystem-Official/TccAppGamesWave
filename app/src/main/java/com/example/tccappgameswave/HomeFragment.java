@@ -40,8 +40,8 @@ public class HomeFragment extends Fragment{
 
     List<Produto> produtoList;
 
-    AdapterHomeRecycler adapterTiro, adapterTerror, adapterRPG;
-    public  RecyclerView recyclerViewTiro, recyclerViewTerror, recyclerViewRPG;
+    AdapterHomeRecycler adapterTiro, adapterTerror, adapterRPG, adapterSimula;
+    public  RecyclerView recyclerViewTiro, recyclerViewTerror, recyclerViewRPG, recyclerViewSimula;
 
     EditText editPesquisa;
     String LinkApi;
@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment{
         MostraProdsRPG();
         MostraProdsTerror();
         MostraProdsTiro();
+        MostraProdsSimulacao();
     }
 
     @SuppressLint("MissingInflatedId")
@@ -111,18 +112,22 @@ public class HomeFragment extends Fragment{
         recyclerViewTiro=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCatTiro);
         recyclerViewTerror=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCatTerror);
         recyclerViewRPG=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCatRPG);
+        recyclerViewSimula=(RecyclerView)view.findViewById(R.id.recyclerview_ProdCatSiluma);
 
         recyclerViewTiro.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewTerror.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewRPG.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewSimula.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         adapterRPG = new AdapterHomeRecycler(getContext(), produtoList);
         adapterTerror = new AdapterHomeRecycler(getContext(), produtoList);
         adapterTiro = new AdapterHomeRecycler(getContext(), produtoList);
+        adapterSimula = new AdapterHomeRecycler(getContext(), produtoList);
 
         recyclerViewTiro.setAdapter(adapterTiro);
         recyclerViewTerror.setAdapter(adapterTerror);
         recyclerViewRPG.setAdapter(adapterRPG);
+        recyclerViewSimula.setAdapter(adapterSimula);
 
         progressBar =(ProgressBar) view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -150,6 +155,30 @@ public class HomeFragment extends Fragment{
 
                     progressBar.setVisibility(View.GONE);
                     TelaToda.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Produto>> call, Throwable t) {
+                Log.i("Ocorreu um erro ao tentar consultar o Perfil. Erro:", t.getMessage());
+            }
+        });
+    }
+
+    private void MostraProdsSimulacao() {
+        //pega categoria
+        String sCat = "Simulação";
+
+        //pesquisa
+        RESTService restService = retrofitHomeProd.create(RESTService.class);
+        Call<List<Produto>> call= restService.MostraProdPorCat(sCat);
+        //executa e mostra a requisisao
+        call.enqueue(new Callback<List<Produto>>() {
+            @Override
+            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
+                if (response.isSuccessful()) {
+                    produtoList = response.body();
+                    adapterSimula.setMovieList(produtoList);
                 }
             }
 
