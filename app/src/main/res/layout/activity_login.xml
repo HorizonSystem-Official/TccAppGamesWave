@@ -37,7 +37,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EditSenhaLogin"
         android:layout_width="match_parent"
@@ -45,7 +44,6 @@
         android:layout_margin="40dp"
         android:textSize="16sp"
         android:paddingStart="48dp"
-        android:hint="@string/TxtSenha"
         android:text=""
         android:textColor="@color/colorText"
         android:inputType="textPassword"
