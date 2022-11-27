@@ -2,7 +2,7 @@
 APP Ecommerce para venda de jogos
 Feito Para o TCC de 2022
 
-<p> <a href="https://drive.google.com/file/d/1eSpfJXPg4xitnuAtAxJDQV76hM2UorDC/view"/>Video Demo<p/>
+<p> <a href="https://youtu.be/2fr7kO5p2M4"/>Video Demo<p/>
 
 # Indice
 
@@ -31,6 +31,7 @@ Feito Para o TCC de 2022
 * [Lucas](https://github.com/LucasBara-dising)
 * Arthur B.
 * Pedro R.
+* Carlos
 
 Feito com :star: e Android.
 
