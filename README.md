@@ -9,6 +9,8 @@ Feito Para o TCC de 2022
 - [Sobre](#sobre)
 - [Telas](#telas)
 - [Tecnologias](#tecnologias)
+- [Como Usar](#comousar)
+
 
 # Sobre
  Sobre o APP: É um aplicativo onde é possível comprar jogos virtuais, consultando os detalhes de cada jogo. 
@@ -16,8 +18,10 @@ Feito Para o TCC de 2022
  presentes no catálogo e adicionar os seus favoritos ao carrinho para comprá los.
  
  # Telas
- ## para fazer###
-
+Tela
+ 
+# Como Usar
+Antes de usar o Aplicativo é necessario executar a [Api Criada Para esse proejeto](https://github.com/HorizonSystem-Official/API_TccGamesWave) (Informações no readme da API) e hospedar na web e usando [Conveyor by keyoti](https://conveyor.cloud/). Com a API Rodando Abra a [MainActivity.java](https://github.com/HorizonSystem-Official/TccAppGamesWave/blob/master/app/src/main/java/com/example/tccappgameswave/MainActivity.java), procure a string *dataLinkApi* e mudeu o seu link, adicionando /api/ ao final. 
  
  # Tecnologias
  Sessão de frameworks/bibliotecas usadas no App junto com as tecnologias usadas
@@ -27,11 +31,10 @@ Feito Para o TCC de 2022
 * [Picasso](https://square.github.io/picasso/)
 * [Retrofit](https://square.github.io/retrofit/)
 
-# Contribuidores <3
+# Contribuidores :star:
 * [Lucas](https://github.com/LucasBara-dising)
 * Arthur B.
 * Pedro R.
 * Carlos
 
-Feito com :star: e Android.
-
+Feito com :heart: e Android.
