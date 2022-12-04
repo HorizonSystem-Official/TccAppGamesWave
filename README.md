@@ -9,6 +9,7 @@ Feito Para o TCC de 2022
 - [Sobre](#sobre)
 - [Telas](#telas)
 - [Tecnologias](#tecnologias)
+- [Requisitos](#requistos)
 - [Como Usar](#como-usar)
 
 
@@ -26,8 +27,11 @@ Feito Para o TCC de 2022
  <img src="https://github.com/HorizonSystem-Official/TccAppGamesWave/blob/master/Print/Screenshot_20221130-174744.png" alt="Tela de Carrinho " width="200px"/>
 </div>
 
+# Requistos
+Para executar o aplicativo é necessario ter instalado [Android Studio](https://developer.android.com/studio?hl=pt&gclid=EAIaIQobChMIxobQo-vf-wIVVORcCh2pcQOvEAAYASAAEgKW5vD_BwE&gclsrc=aw.ds) 
+
 # Como Usar
-Antes de usar o Aplicativo é necessario executar a [Api Criada Para esse proejeto](https://github.com/HorizonSystem-Official/API_TccGamesWave) (Informações no readme da API) e hospedar na web e usando [Conveyor by keyoti](https://conveyor.cloud/). Com a API Rodando Abra a [MainActivity.java](https://github.com/HorizonSystem-Official/TccAppGamesWave/blob/master/app/src/main/java/com/example/tccappgameswave/MainActivity.java), procure a string *dataLinkApi* e mudeu o seu link, adicionando /api/ ao final. 
+Antes de usar o Aplicativo é necessario executar a [Api Criada Para esse proejeto](https://github.com/HorizonSystem-Official/API_TccGamesWave) (Informações no readme da API) e hospedar na web e usando [Conveyor by keyoti](https://conveyor.cloud/). Com a API Rodando, clone o projeto [Do aplicativo](https://github.com/HorizonSystem-Official/TccAppGamesWave) e Abra a [MainActivity.java](https://github.com/HorizonSystem-Official/TccAppGamesWave/blob/master/app/src/main/java/com/example/tccappgameswave/MainActivity.java), procure a string *dataLinkApi* (linha 39) e mudeu o seu link, adicionando o link do Conveyor by keyoti e /api/ ao final. 
  
  # Tecnologias
  Sessão de frameworks/bibliotecas usadas no App junto com as tecnologias usadas
@@ -38,9 +42,11 @@ Antes de usar o Aplicativo é necessario executar a [Api Criada Para esse proeje
 * [Retrofit](https://square.github.io/retrofit/)
 
 # Contribuidores :star:
-* [Lucas](https://github.com/LucasBara-dising)
+* [Lucas B.](https://github.com/LucasBara-dising)
 * Arthur B.
 * Pedro R.
-* Carlos
+* Carlos 
+* Diego A.
+* João Paulo A.
 
 Feito com :heart: e Android.
